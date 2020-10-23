@@ -1,4 +1,5 @@
 import React from 'react';
+import { withRouter } from 'react-router-dom';
 import Card from '../components/card';
 import FormGroup from '../components/form-group';
 
@@ -12,6 +13,10 @@ class TeacherRegister extends React.Component {
 
   register = () => {
     console.log(this.state);
+  };
+
+  cancelRegister = () => {
+    this.props.history.push('/login');
   };
 
   render() {
@@ -79,7 +84,11 @@ class TeacherRegister extends React.Component {
                 >
                   Salvar
                 </button>
-                <button type="button" className="btn btn-danger">
+                <button
+                  onClick={this.cancelRegister}
+                  type="button"
+                  className="btn btn-danger"
+                >
                   Cancelar
                 </button>
               </div>
@@ -91,4 +100,4 @@ class TeacherRegister extends React.Component {
   }
 }
 
-export default TeacherRegister;
+export default withRouter(TeacherRegister);

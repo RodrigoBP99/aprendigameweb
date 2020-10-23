@@ -11,7 +11,7 @@ class App extends React.Component {
     return (
       <>
         <Navbar />
-        <div>
+        <div className="container">
           <Routes />
         </div>
       </>

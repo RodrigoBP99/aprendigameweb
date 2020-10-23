@@ -5,7 +5,7 @@ function Navbar() {
   return (
     <div className="navbar navbar-expand-lg fixed-top navbar-dark bg-info">
       <div className="container">
-        <a href="/#/" className="navbar-brand">
+        <a href="#/home" className="navbar-brand">
           AprendiGame
         </a>
         <button
@@ -21,7 +21,7 @@ function Navbar() {
         </button>
         <div className="collapse navbar-collapse" id="navbarResponsive">
           <ul className="navbar-nav">
-            <NavbarItem href="#/" label="Home" />
+            <NavbarItem href="#/home" label="Home" />
             <NavbarItem href="#/" label="Cursos" />
             <NavbarItem href="#/" label="Classes" />
             <NavbarItem href="#/login" label="Login" />
