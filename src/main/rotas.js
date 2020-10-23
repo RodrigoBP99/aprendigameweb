@@ -9,7 +9,7 @@ function Routes() {
     <HashRouter>
       <Switch>
         <Route path="/login" component={Login} />
-        <Route path="teacher-register" component={TeacherRegister} />
+        <Route path="/teacher-register" component={TeacherRegister} />
       </Switch>
     </HashRouter>
   );
