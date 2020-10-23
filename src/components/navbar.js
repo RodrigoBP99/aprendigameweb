@@ -1,8 +1,9 @@
 import React from 'react';
+import NavbarItem from './navbarItem';
 
 function Navbar() {
   return (
-    <div className="navbar navbar-expand-lg fixed-top navbar-dark bg-primary">
+    <div className="navbar navbar-expand-lg fixed-top navbar-dark bg-info">
       <div className="container">
         <a href="/#/" className="navbar-brand">
           AprendiGame
@@ -20,26 +21,10 @@ function Navbar() {
         </button>
         <div className="collapse navbar-collapse" id="navbarResponsive">
           <ul className="navbar-nav">
-            <li className="nav-item">
-              <a className="nav-link" href="/#">
-                Home
-              </a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link" href="usuarios.html">
-                Cursos
-              </a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link" href="lancamentos.html">
-                Classes
-              </a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link" href="#/login">
-                Login
-              </a>
-            </li>
+            <NavbarItem href="#/" label="Home" />
+            <NavbarItem href="#/" label="Cursos" />
+            <NavbarItem href="#/" label="Classes" />
+            <NavbarItem href="#/login" label="Login" />
           </ul>
         </div>
       </div>
