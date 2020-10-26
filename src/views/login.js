@@ -2,24 +2,33 @@ import React from 'react';
 import Card from '../components/card';
 import FormGroup from '../components/form-group';
 import { withRouter } from 'react-router-dom';
-import axios from 'axios';
+
+import TeacherService from '../app/service/teacherService';
 
 class Login extends React.Component {
   state = {
     registration: '',
     password: '',
+    messageErro: null,
   };
+
+  constructor() {
+    super();
+    this.service = new TeacherService();
+  }
+
   entrar = () => {
-    axios
-      .post('http://localhost:8080/api/teacher/login', {
+    this.service
+      .authenticate({
         registration: this.state.registration,
         password: this.state.password,
       })
       .then((res) => {
-        console.log(res);
+        localStorage.setItem('loged_teacher', JSON.stringify(res.data));
+        this.props.history.push('/home');
       })
       .catch((erro) => {
-        console.log(erro.response);
+        this.setState({ messageErro: erro.response.data });
       });
   };
 
@@ -37,6 +46,9 @@ class Login extends React.Component {
           >
             <div className="bs-docs-section">
               <Card tittle="Login">
+                <div className="row">
+                  <span>{this.state.messageErro}</span>
+                </div>
                 <div className="row">
                   <div className="col-lg-12">
                     <fieldset>
