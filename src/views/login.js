@@ -2,6 +2,7 @@ import React from 'react';
 import Card from '../components/card';
 import FormGroup from '../components/form-group';
 import { withRouter } from 'react-router-dom';
+import axios from 'axios';
 
 class Login extends React.Component {
   state = {
@@ -9,8 +10,17 @@ class Login extends React.Component {
     password: '',
   };
   entrar = () => {
-    console.log('Matricula: ', this.state.registration);
-    console.log('Senha: ', this.state.password);
+    axios
+      .post('http://localhost:8080/api/teacher/login', {
+        registration: this.state.registration,
+        password: this.state.password,
+      })
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((erro) => {
+        console.log(erro.response);
+      });
   };
 
   prepareRegister = () => {
