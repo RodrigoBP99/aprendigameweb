@@ -4,6 +4,7 @@ import FormGroup from '../components/form-group';
 import { withRouter } from 'react-router-dom';
 
 import TeacherService from '../app/service/teacherService';
+import LocalStorageService from '../app/service/localstorageService';
 
 class Login extends React.Component {
   state = {
@@ -24,7 +25,7 @@ class Login extends React.Component {
         password: this.state.password,
       })
       .then((res) => {
-        localStorage.setItem('loged_teacher', JSON.stringify(res.data));
+        LocalStorageService.addItem('_loged_teacher', res.data);
         this.props.history.push('/home');
       })
       .catch((erro) => {
