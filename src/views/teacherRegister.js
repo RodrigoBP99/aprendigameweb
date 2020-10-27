@@ -3,6 +3,9 @@ import { withRouter } from 'react-router-dom';
 import Card from '../components/card';
 import FormGroup from '../components/form-group';
 
+import TeacherService from '../app/service/teacherService';
+import { successMessage, erroMessage } from '../components/toastr';
+
 class TeacherRegister extends React.Component {
   state = {
     name: '',
@@ -11,8 +14,56 @@ class TeacherRegister extends React.Component {
     passwordRepet: '',
   };
 
+  constructor() {
+    super();
+    this.service = new TeacherService();
+  }
+
+  validate() {
+    const msgs = [];
+
+    if (!this.state.name) {
+      msgs.push('O campo nome é obrigatorio');
+    }
+
+    if (!this.state.registration) {
+      msgs.push('O campo Matricula é obrigatorio');
+    }
+
+    if (!this.state.password || !this.state.passwordRepet) {
+      msgs.push('Preencha os campos de senha');
+    } else if (this.state.password !== this.state.passwordRepet) {
+      msgs.push('As senhas devem ser iguais');
+    }
+
+    return msgs;
+  }
+
   register = () => {
-    console.log(this.state);
+    const msgs = this.validate();
+
+    if (msgs && msgs.length > 0) {
+      msgs.forEach((msg, index) => {
+        erroMessage(msg);
+      });
+      return false;
+    }
+
+    const teacher = {
+      name: this.state.name,
+      registration: this.state.registration,
+      password: this.state.password,
+    };
+
+    this.service
+      .save(teacher)
+      .then((res) => {
+        successMessage('Usuario cadastrado com sucesso, faça o login');
+        this.props.history.push('/login');
+      })
+      .catch((erro) => {
+        erroMessage(erro.response.data);
+      });
   };
 
   cancelRegister = () => {

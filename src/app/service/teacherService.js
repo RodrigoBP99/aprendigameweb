@@ -12,6 +12,10 @@ class TeacherService extends ApiService {
   getCourseClassSizeForTeacher(id) {
     return this.get(`/${id}/classesLength`);
   }
+
+  save(teacher) {
+    return this.post('/register', teacher);
+  }
 }
 
 export default TeacherService;
