@@ -12,6 +12,9 @@ pre {
     box-shadow: none;
   }
 }
+.btn {
+  margin-top: 10px;
+}
 #home,
 #help {
   font-size: 0.9rem;

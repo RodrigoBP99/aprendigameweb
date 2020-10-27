@@ -85,12 +85,14 @@ class Login extends React.Component {
                         </FormGroup>
 
                         <button
+                          type="button"
                           onClick={this.entrar}
                           className="btn btn-success"
                         >
                           Entrar
                         </button>
                         <button
+                          type="button"
                           onClick={this.prepareRegister}
                           className="btn btn-danger"
                         >
