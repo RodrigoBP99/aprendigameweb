@@ -8,7 +8,29 @@ export default (props) => {
         <td>{courseClass.name}</td>
         <td>{courseClass.courseUnit.name}</td>
         <td>{courseClass.teacher.name}</td>
-        <td></td>
+        <td>
+          <button
+            type="button"
+            onClick={(e) => props.actionEdit(courseClass.id)}
+            className="btn btn-success"
+          >
+            Editar
+          </button>
+          <button
+            type="button"
+            className="btn btn-danger"
+            onClick={(e) => props.actionOpen(courseClass.id)}
+          >
+            Abrir
+          </button>
+          <button
+            type="button"
+            className="btn btn-danger"
+            onClick={(e) => props.actionDelete(courseClass)}
+          >
+            Deletar
+          </button>
+        </td>
       </tr>
     );
   });

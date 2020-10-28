@@ -5,13 +5,14 @@ import FormGroup from '../../components/form-group';
 import CourseClassTable from './courseClassTable';
 import CourseClassService from '../../app/service/courseclassService';
 import LocalstorageService from '../../app/service/localstorageService';
+import { erroMessage, successMessage } from '../../components/toastr';
 
 class ConsultCourseClass extends React.Component {
   state = {
     courseUnit: '',
     name: '',
     teacher: '',
-    courseClass: [],
+    courseClassList: [],
   };
 
   constructor() {
@@ -31,10 +32,35 @@ class ConsultCourseClass extends React.Component {
     this.service
       .search(courseClassFilter)
       .then((res) => {
-        this.setState({ courseClass: res.data });
+        this.setState({ courseClassList: res.data });
       })
       .catch((erro) => {
         console.log(erro);
+      });
+  };
+
+  editCourseClass = (id) => {
+    console.log('ir para pagina para editar Classe');
+  };
+
+  openCourseClass = (id) => {
+    console.log('ir para pagina da Classe');
+  };
+
+  deleteCourseClass = (courseClass) => {
+    this.service
+      .delete(courseClass.id)
+      .then((res) => {
+        const courseClassList = this.state.courseClassList;
+        const index = courseClassList.indexOf(courseClass);
+        courseClassList.splice(index);
+
+        this.setState(courseClassList);
+
+        successMessage('Classe deletada com sucesso');
+      })
+      .catch((erro) => {
+        erroMessage('Erro ao tentar deletar a Classe');
       });
   };
 
@@ -83,7 +109,10 @@ class ConsultCourseClass extends React.Component {
           <div className="col-lg-12">
             <div className="bs-component">
               <CourseClassTable
-                courseClass={this.state.courseClass}
+                courseClass={this.state.courseClassList}
+                actionEdit={this.editCourseClass}
+                actionOpen={this.openCourseClass}
+                actionDelete={this.deleteCourseClass}
               ></CourseClassTable>
             </div>
           </div>
