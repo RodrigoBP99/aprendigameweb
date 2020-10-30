@@ -1,7 +1,8 @@
 import axios from 'axios';
+import config from './baseUrlData';
 
 const httpClient = axios.create({
-  baseURL: 'http://localhost:8080',
+  baseURL: config.baseUrl,
 });
 
 class ApiService {

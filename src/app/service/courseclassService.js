@@ -19,7 +19,11 @@ export default class CourseClassService extends ApiService {
     return this.get(params);
   }
 
-  delete(id) {
+  deleteCourseClass(id) {
     return this.delete(`/${id}`);
+  }
+
+  save(courseClass) {
+    return this.post('/save', courseClass);
   }
 }
