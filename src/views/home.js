@@ -17,14 +17,14 @@ class Home extends React.Component {
   componentDidMount() {
     const logedTeacher = LocalstorageService.getItem('_loged_teacher');
 
-    this.teacherService
-      .getCourseClassSizeForTeacher(logedTeacher.id)
-      .then((res) => {
-        this.setState({ classesLength: res.data });
-      })
-      .catch((erro) => {
-        console.error(erro.response);
-      });
+    // this.teacherService
+    //   .getCourseClassSizeForTeacher(logedTeacher.id)
+    //   .then((res) => {
+    //     this.setState({ classesLength: res.data });
+    //   })
+    //   .catch((erro) => {
+    //     console.error(erro.response);
+    //   });
   }
 
   render() {
