@@ -127,7 +127,6 @@ class TeacherRegister extends React.Component {
                     }
                   />
                 </FormGroup>
-
                 <button
                   onClick={this.register}
                   type="button"
