@@ -45,6 +45,10 @@ class ConsultCourseClass extends React.Component {
       });
   };
 
+  componentDidMount = () => {
+    this.search();
+  };
+
   register = () => {
     this.props.history.push('/register-class');
   };
