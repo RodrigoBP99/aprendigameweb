@@ -6,8 +6,8 @@ export default (props) => {
       <tr key={courseClass.id}>
         <td>{courseClass.code}</td>
         <td>{courseClass.name}</td>
-        <td>{courseClass.courseUnit.name}</td>
-        <td>{courseClass.teacher.name}</td>
+        {/* <td>{courseClass.courseUnit.name}</td> */}
+        {/* <td>{courseClass.teacher.name}</td> */}
         <td>
           <button
             type="button"

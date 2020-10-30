@@ -5,13 +5,16 @@ import FormGroup from '../../components/form-group';
 import CourseClassTable from './courseClassTable';
 import CourseClassService from '../../app/service/courseclassService';
 import LocalstorageService from '../../app/service/localstorageService';
-import { erroMessage, successMessage } from '../../components/toastr';
+import * as messages from '../../components/toastr';
+import { Dialog } from 'primereact/dialog';
+import { Button } from 'primereact/button';
 
 class ConsultCourseClass extends React.Component {
   state = {
     courseUnit: '',
     name: '',
-    teacher: '',
+    showConfirmDialog: false,
+    deletedCourseClass: {},
     courseClassList: [],
   };
 
@@ -26,17 +29,24 @@ class ConsultCourseClass extends React.Component {
     const courseClassFilter = {
       courseUnit: this.state.courseUnit,
       name: this.state.name,
-      teacher: logedTeacher.registration,
+      teacher: logedTeacher.id,
     };
 
     this.service
       .search(courseClassFilter)
       .then((res) => {
         this.setState({ courseClassList: res.data });
+        messages.successMessage(
+          `Foram encontrados ${this.state.courseClassList.length} Turmas`
+        );
       })
       .catch((erro) => {
-        console.log(erro);
+        messages.erroMessage(erro.response.data);
       });
+  };
+
+  register = () => {
+    this.props.history.push('/register-class');
   };
 
   editCourseClass = (id) => {
@@ -47,24 +57,51 @@ class ConsultCourseClass extends React.Component {
     console.log('ir para pagina da Classe');
   };
 
-  deleteCourseClass = (courseClass) => {
+  openConfirmation = (courseClass) => {
+    this.setState({ showConfirmDialog: true, deletedCourseClass: courseClass });
+  };
+
+  cancelDeleteCourseClass = () => {
+    this.setState({ showConfirmDialog: false, deletedCourseClass: {} });
+  };
+
+  deleteCourseClass = () => {
     this.service
-      .delete(courseClass.id)
+      .deleteCourseClass(this.state.deletedCourseClass.id)
       .then((res) => {
         const courseClassList = this.state.courseClassList;
-        const index = courseClassList.indexOf(courseClass);
-        courseClassList.splice(index);
+        const index = courseClassList.indexOf(this.state.deletedCourseClass);
+        courseClassList.splice(index, 1);
 
-        this.setState(courseClassList);
+        this.setState({
+          courseClassList: courseClassList,
+          showConfirmDialog: false,
+        });
 
-        successMessage('Classe deletada com sucesso');
+        messages.successMessage('Classe deletada com sucesso');
       })
       .catch((erro) => {
-        erroMessage('Erro ao tentar deletar a Classe');
+        messages.erroMessage('Erro ao tentar deletar a Classe');
       });
   };
 
   render() {
+    const footerDialog = (
+      <div>
+        <Button
+          label="Confirmar"
+          icon="pi pi-check"
+          onClick={this.deleteCourseClass}
+        />
+        <Button
+          label="Cancelar"
+          icon="pi pi-times"
+          onClick={this.cancelDeleteCourseClass}
+          className="p-button-secondary"
+        />
+      </div>
+    );
+
     return (
       <Card tittle="Consultar Classes">
         <div className="row">
@@ -99,7 +136,11 @@ class ConsultCourseClass extends React.Component {
               >
                 Buscar
               </button>
-              <button type="button" className="btn btn-danger">
+              <button
+                type="button"
+                className="btn btn-danger"
+                onClick={this.register}
+              >
                 Cadastrar
               </button>
             </div>
@@ -112,10 +153,22 @@ class ConsultCourseClass extends React.Component {
                 courseClass={this.state.courseClassList}
                 actionEdit={this.editCourseClass}
                 actionOpen={this.openCourseClass}
-                actionDelete={this.deleteCourseClass}
+                actionDelete={this.openConfirmation}
               ></CourseClassTable>
             </div>
           </div>
+        </div>
+        <div>
+          <Dialog
+            header="Confirmação"
+            visible={this.state.showConfirmDialog}
+            style={{ width: '50vw' }}
+            modal={true}
+            onHide={() => this.setState({ showConfirmDialog: false })}
+            footer={footerDialog}
+          >
+            Você deseja mesmo deletar essa Turma?
+          </Dialog>
         </div>
       </Card>
     );
