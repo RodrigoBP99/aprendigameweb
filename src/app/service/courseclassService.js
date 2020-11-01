@@ -26,4 +26,12 @@ export default class CourseClassService extends ApiService {
   save(courseClass) {
     return this.post('/save', courseClass);
   }
+
+  update(courseClass) {
+    return this.put(`/update/${courseClass.id}`, courseClass);
+  }
+
+  getById(id) {
+    return this.get(`/find/${id}`);
+  }
 }

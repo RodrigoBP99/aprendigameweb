@@ -11,12 +11,27 @@ class RegisterCourseClass extends React.Component {
     id: null,
     name: '',
     code: '',
+    teacherId: null,
     courseUnitCode: '',
   };
 
   constructor() {
     super();
     this.service = new CourseClassService();
+  }
+
+  componentDidMount() {
+    const params = this.props.match.params;
+    if (params.id) {
+      this.service
+        .getById(params.id)
+        .then((res) => {
+          this.setState({ ...res.data });
+        })
+        .catch((erro) => {
+          messages.erroMessage(erro.response.data);
+        });
+    }
   }
 
   cancelRegister = () => {
@@ -39,6 +54,28 @@ class RegisterCourseClass extends React.Component {
       .save(courseClass)
       .then((res) => {
         messages.successMessage('Turma cadastrada com sucesso');
+        this.props.history.push('/consult-classes');
+      })
+      .catch((erro) => {
+        messages.erroMessage(erro.response.data);
+      });
+  };
+
+  updateCourseClass = () => {
+    const { name, code, courseUnitCode, id, teacherId } = this.state;
+
+    const courseClass = {
+      name,
+      code,
+      courseUnitCode,
+      id,
+      teacherId,
+    };
+
+    this.service
+      .update(courseClass)
+      .then((res) => {
+        messages.successMessage('Turma atualizada com sucesso');
         this.props.history.push('/consult-classes');
       })
       .catch((erro) => {
@@ -105,6 +142,13 @@ class RegisterCourseClass extends React.Component {
               onClick={this.saveCourseClass}
             >
               Salvar
+            </button>
+            <button
+              type="button"
+              className="btn btn-warning"
+              onClick={this.updateCourseClass}
+            >
+              Atualizar
             </button>
             <button
               type="button"

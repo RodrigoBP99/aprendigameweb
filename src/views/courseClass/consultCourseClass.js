@@ -54,7 +54,7 @@ class ConsultCourseClass extends React.Component {
   };
 
   editCourseClass = (id) => {
-    console.log('ir para pagina para editar Classe');
+    this.props.history.push(`/register-class/${id}`);
   };
 
   openCourseClass = (id) => {
