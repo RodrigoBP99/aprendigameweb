@@ -9,16 +9,14 @@ export default (props) => {
         <td>
           {courseClass.courseUnit === null
             ? '-------'
-            : courseClass.courseUnit.code}
+            : courseClass.courseUnit.name}
           <br />
-          {courseClass.courseUnit === null ? '' : courseClass.courseUnit.name}
+          {courseClass.courseUnit === null ? '' : courseClass.courseUnit.code}
         </td>
         <td>
-          {courseClass.teacher === null
-            ? '-------'
-            : courseClass.teacher.registration}{' '}
+          {courseClass.teacher === null ? '-------' : courseClass.teacher.name}
           <br />
-          {courseClass.teacher === null ? '' : courseClass.teacher.name}
+          {courseClass.teacher === null ? '' : courseClass.teacher.registration}
         </td>
         <td>
           <button

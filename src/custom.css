@@ -12,9 +12,6 @@ pre {
     box-shadow: none;
   }
 }
-.btn {
-  margin: 5px 5px 5px 0;
-}
 #home,
 #help {
   font-size: 0.9rem;
@@ -248,6 +245,10 @@ pre {
     text-align: center;
   }
 }
+.btn {
+  margin: 5px 5px 5px 0;
+  border: 1px groove;
+}
 
 th {
   text-align: center;
@@ -255,4 +256,32 @@ th {
 
 td {
   text-align: center;
+}
+
+input[type]::placeholder {
+  font-style: italic;
+}
+
+input[type]:focus {
+  background-color: white;
+  color: #000000;
+}
+
+input[type] {
+  background-color: white;
+  color: #000000;
+}
+
+.card-header {
+  background-color: rgb(239 245 255);
+}
+
+.card {
+  border: 1px groove;
+}
+
+.jumbotron {
+  background-color: transparent;
+  border-radius: 0.3rem;
+  border: 1px groove;
 }

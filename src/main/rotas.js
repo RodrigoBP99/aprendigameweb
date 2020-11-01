@@ -15,7 +15,7 @@ function Routes() {
         <Route path="/login" component={Login} />
         <Route path="/teacher-register" component={TeacherRegister} />
         <Route path="/consult-classes" component={ConsultCourseClass} />
-        <Route path="/register-class" component={RegisterCourseClass} />
+        <Route path="/register-class/:id?" component={RegisterCourseClass} />
       </Switch>
     </HashRouter>
   );
