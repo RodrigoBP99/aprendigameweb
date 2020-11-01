@@ -21,24 +21,24 @@ export default (props) => {
         <td>
           <button
             type="button"
-            onClick={(e) => props.actionEdit(courseClass.id)}
             className="btn btn-success"
+            onClick={(e) => props.actionOpen(courseClass.id)}
           >
-            Editar
+            Abrir <i className="pi pi-check" />
           </button>
           <button
             type="button"
-            className="btn btn-danger"
-            onClick={(e) => props.actionOpen(courseClass.id)}
+            onClick={(e) => props.actionEdit(courseClass.id)}
+            className="btn btn-warning"
           >
-            Abrir
+            Editar <i className="pi pi-pencil" />
           </button>
           <button
             type="button"
             className="btn btn-danger"
             onClick={(e) => props.actionDelete(courseClass)}
           >
-            Deletar
+            <i className="pi pi-trash" />
           </button>
         </td>
       </tr>

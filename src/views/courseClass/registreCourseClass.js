@@ -153,7 +153,7 @@ class RegisterCourseClass extends React.Component {
                 className="btn btn-warning"
                 onClick={this.updateCourseClass}
               >
-                Atualizar
+                Atualizar <i className="pi pi-save" />
               </button>
             ) : (
               <button
@@ -161,7 +161,7 @@ class RegisterCourseClass extends React.Component {
                 className="btn btn-success"
                 onClick={this.saveCourseClass}
               >
-                Salvar
+                Salvar <i className="pi pi-save" />
               </button>
             )}
             <button
@@ -169,7 +169,7 @@ class RegisterCourseClass extends React.Component {
               className="btn btn-danger"
               onClick={this.cancelRegister}
             >
-              Cancelar
+              Cancelar <i className="pi pi-times" />
             </button>
           </div>
         </div>

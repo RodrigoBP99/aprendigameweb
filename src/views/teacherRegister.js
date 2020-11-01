@@ -115,14 +115,14 @@ class TeacherRegister extends React.Component {
                   type="button"
                   className="btn btn-success"
                 >
-                  Salvar
+                  Salvar <i className="pi pi-save" />
                 </button>
                 <button
                   onClick={this.cancelRegister}
                   type="button"
                   className="btn btn-danger"
                 >
-                  Cancelar
+                  Cancelar <i className="pi pi-times" />
                 </button>
               </div>
             </div>

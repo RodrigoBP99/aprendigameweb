@@ -138,14 +138,14 @@ class ConsultCourseClass extends React.Component {
                 onClick={this.search}
                 className="btn btn-success"
               >
-                Buscar
+                Buscar <i className="pi pi-search" />
               </button>
               <button
                 type="button"
-                className="btn btn-danger"
+                className="btn btn-info"
                 onClick={this.register}
               >
-                Cadastrar
+                Cadastrar <i className="pi pi-plus" />
               </button>
             </div>
           </div>
