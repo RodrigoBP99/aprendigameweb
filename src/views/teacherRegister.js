@@ -4,7 +4,7 @@ import Card from '../components/card';
 import FormGroup from '../components/form-group';
 
 import TeacherService from '../app/service/teacherService';
-import { successMessage, erroMessage } from '../components/toastr';
+import * as messages from '../components/toastr';
 
 class TeacherRegister extends React.Component {
   state = {
@@ -19,50 +19,33 @@ class TeacherRegister extends React.Component {
     this.service = new TeacherService();
   }
 
-  validate() {
-    const msgs = [];
-
-    if (!this.state.name) {
-      msgs.push('O campo nome é obrigatorio');
-    }
-
-    if (!this.state.registration) {
-      msgs.push('O campo Matricula é obrigatorio');
-    }
-
-    if (!this.state.password || !this.state.passwordRepet) {
-      msgs.push('Preencha os campos de senha');
-    } else if (this.state.password !== this.state.passwordRepet) {
-      msgs.push('As senhas devem ser iguais');
-    }
-
-    return msgs;
-  }
-
   register = () => {
-    const msgs = this.validate();
-
-    if (msgs && msgs.length > 0) {
-      msgs.forEach((msg, index) => {
-        erroMessage(msg);
-      });
-      return false;
-    }
-
     const teacher = {
       name: this.state.name,
       registration: this.state.registration,
       password: this.state.password,
     };
 
+    const passwordRepet = this.state.passwordRepet;
+
+    try {
+      this.service.validate(teacher, passwordRepet);
+    } catch (error) {
+      const message = error.messages;
+      message.forEach((msg) => {
+        messages.erroMessage(msg);
+      });
+      return false;
+    }
+
     this.service
       .save(teacher)
       .then((res) => {
-        successMessage('Usuario cadastrado com sucesso, faça o login');
+        messages.successMessage('Usuario cadastrado com sucesso, faça o login');
         this.props.history.push('/login');
       })
       .catch((erro) => {
-        erroMessage(erro.response.data);
+        messages.erroMessage(erro.response.data);
       });
   };
 
