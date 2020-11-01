@@ -13,6 +13,7 @@ class RegisterCourseClass extends React.Component {
     code: '',
     teacherId: null,
     courseUnitCode: '',
+    update: false,
   };
 
   constructor() {
@@ -26,7 +27,7 @@ class RegisterCourseClass extends React.Component {
       this.service
         .getById(params.id)
         .then((res) => {
-          this.setState({ ...res.data });
+          this.setState({ ...res.data, update: true });
         })
         .catch((erro) => {
           messages.erroMessage(erro.response.data);
@@ -92,7 +93,7 @@ class RegisterCourseClass extends React.Component {
 
   render() {
     return (
-      <Card tittle="Cadastrar Turma">
+      <Card tittle={this.state.update ? 'Atualizar Turma' : 'Cadastrar Turma'}>
         <div className="row">
           <div className="col-md-12">
             <FormGroup htmlFor="inputName" label="Nome: *">
@@ -103,7 +104,7 @@ class RegisterCourseClass extends React.Component {
                 name="name"
                 id="inputName"
                 className="form-control"
-                placeholder="Educação Física"
+                placeholder="Nome da Turma"
               />
             </FormGroup>
           </div>
@@ -116,7 +117,7 @@ class RegisterCourseClass extends React.Component {
                 name="code"
                 id="inputCode"
                 className="form-control"
-                placeholder="CL1557"
+                placeholder="CL00000"
               />
             </FormGroup>
           </div>
@@ -129,27 +130,30 @@ class RegisterCourseClass extends React.Component {
                 onChange={this.handleChange}
                 id="inputCourseUnitCode"
                 className="form-control"
-                placeholder="CU0087"
+                placeholder="CU00000"
               />
             </FormGroup>
           </div>
         </div>
         <div className="row">
           <div className="col-md-12">
-            <button
-              type="button"
-              className="btn btn-success"
-              onClick={this.saveCourseClass}
-            >
-              Salvar
-            </button>
-            <button
-              type="button"
-              className="btn btn-warning"
-              onClick={this.updateCourseClass}
-            >
-              Atualizar
-            </button>
+            {this.state.update ? (
+              <button
+                type="button"
+                className="btn btn-warning"
+                onClick={this.updateCourseClass}
+              >
+                Atualizar
+              </button>
+            ) : (
+              <button
+                type="button"
+                className="btn btn-success"
+                onClick={this.saveCourseClass}
+              >
+                Salvar
+              </button>
+            )}
             <button
               type="button"
               className="btn btn-danger"
