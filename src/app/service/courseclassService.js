@@ -14,7 +14,7 @@ export default class CourseClassService extends ApiService {
     }
 
     if (courseClassFilter.name) {
-      params = `${params}$name=${courseClassFilter.name}`;
+      params = `${params}&name=${courseClassFilter.name}`;
     }
 
     return this.get(params);

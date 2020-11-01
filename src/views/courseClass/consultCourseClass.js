@@ -35,10 +35,17 @@ class ConsultCourseClass extends React.Component {
     this.service
       .search(courseClassFilter)
       .then((res) => {
+        const list = res.data;
+
+        if (list.length < 1) {
+          messages.alertMessage('Nenhuma Turma econtrada');
+        } else if (list.length === 1) {
+          messages.successMessage(`${list.length} Turma foi encontrada`);
+        } else {
+          messages.successMessage(`${list.length} Turmas foram encontradas`);
+        }
+
         this.setState({ courseClassList: res.data });
-        messages.successMessage(
-          `Foram encontrados ${this.state.courseClassList.length} Turmas`
-        );
       })
       .catch((erro) => {
         messages.erroMessage(erro.response.data);
@@ -46,7 +53,22 @@ class ConsultCourseClass extends React.Component {
   };
 
   componentDidMount = () => {
-    this.search();
+    const logedTeacher = LocalstorageService.getItem('_loged_teacher');
+
+    const courseClassFilter = {
+      courseUnit: this.state.courseUnit,
+      name: this.state.name,
+      teacher: logedTeacher.id,
+    };
+
+    this.service
+      .search(courseClassFilter)
+      .then((res) => {
+        this.setState({ courseClassList: res.data });
+      })
+      .catch((erro) => {
+        messages.erroMessage(erro.response.data);
+      });
   };
 
   register = () => {
