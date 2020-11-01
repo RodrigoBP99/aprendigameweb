@@ -51,6 +51,16 @@ class RegisterCourseClass extends React.Component {
       teacherId: logedTeacher.id,
     };
 
+    try {
+      this.service.validate(courseClass);
+    } catch (error) {
+      const message = error.messages;
+      message.forEach((msg) => {
+        messages.erroMessage(msg);
+      });
+      return false;
+    }
+
     this.service
       .save(courseClass)
       .then((res) => {

@@ -1,4 +1,5 @@
 import ApiService from '../apiservice';
+import ValidationErro from '../exception/ValidationErro';
 
 export default class CourseClassService extends ApiService {
   constructor() {
@@ -33,5 +34,25 @@ export default class CourseClassService extends ApiService {
 
   getById(id) {
     return this.get(`/find/${id}`);
+  }
+
+  validate(courseClass) {
+    const erros = [];
+
+    if (!courseClass.name) {
+      erros.push('O campo Nome deve ser Preenchido');
+    }
+
+    if (!courseClass.courseUnitCode) {
+      erros.push('O campo Código do Curso deve ser Preenchido');
+    }
+
+    if (!courseClass.code) {
+      erros.push('O campo Código deve ser Preenchido');
+    }
+
+    if (erros && erros.length > 0) {
+      throw new ValidationErro(erros);
+    }
   }
 }
