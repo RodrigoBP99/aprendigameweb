@@ -4,10 +4,10 @@ import Card from '../../components/card';
 import FormGroup from '../../components/form-group';
 import CourseClassTable from './courseClassTable';
 import CourseClassService from '../../app/service/courseclassService';
-import LocalstorageService from '../../app/service/localstorageService';
 import * as messages from '../../components/toastr';
 import { Dialog } from 'primereact/dialog';
 import { Button } from 'primereact/button';
+import { AuthContext } from '../../main/authenticationProvider';
 
 class ConsultCourseClass extends React.Component {
   state = {
@@ -24,7 +24,7 @@ class ConsultCourseClass extends React.Component {
   }
 
   search = () => {
-    const logedTeacher = LocalstorageService.getItem('_loged_teacher');
+    const logedTeacher = this.context.authenticatedUser;
 
     const courseClassFilter = {
       courseUnit: this.state.courseUnit,
@@ -53,7 +53,7 @@ class ConsultCourseClass extends React.Component {
   };
 
   componentDidMount = () => {
-    const logedTeacher = LocalstorageService.getItem('_loged_teacher');
+    const logedTeacher = this.context.authenticatedUser;
 
     const courseClassFilter = {
       courseUnit: this.state.courseUnit,
@@ -200,5 +200,7 @@ class ConsultCourseClass extends React.Component {
     );
   }
 }
+
+ConsultCourseClass.contextType = AuthContext;
 
 export default withRouter(ConsultCourseClass);

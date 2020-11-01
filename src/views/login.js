@@ -4,8 +4,9 @@ import FormGroup from '../components/form-group';
 import { withRouter } from 'react-router-dom';
 
 import TeacherService from '../app/service/teacherService';
-import LocalStorageService from '../app/service/localstorageService';
 import { successMessage, erroMessage } from '../components/toastr';
+
+import { AuthContext } from '../main/authenticationProvider';
 
 class Login extends React.Component {
   state = {
@@ -25,7 +26,7 @@ class Login extends React.Component {
         password: this.state.password,
       })
       .then((res) => {
-        LocalStorageService.addItem('_loged_teacher', res.data);
+        this.context.iniciateSession(res.data);
         successMessage('Você logou com sucesso');
         this.props.history.push('/home');
       })
@@ -110,5 +111,7 @@ class Login extends React.Component {
     );
   }
 }
+
+Login.contextType = AuthContext;
 
 export default withRouter(Login);

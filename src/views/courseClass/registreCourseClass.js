@@ -3,8 +3,8 @@ import Card from '../../components/card';
 import FormGroup from '../../components/form-group';
 import { withRouter } from 'react-router-dom';
 import CourseClassService from '../../app/service/courseclassService';
-import LocalstorageService from '../../app/service/localstorageService';
 import * as messages from '../../components/toastr';
+import { AuthContext } from '../../main/authenticationProvider';
 
 class RegisterCourseClass extends React.Component {
   state = {
@@ -40,7 +40,7 @@ class RegisterCourseClass extends React.Component {
   };
 
   saveCourseClass = () => {
-    const logedTeacher = LocalstorageService.getItem('_loged_teacher');
+    const logedTeacher = this.context.authenticatedUser;
 
     const { name, code, courseUnitCode } = this.state;
 
@@ -177,5 +177,7 @@ class RegisterCourseClass extends React.Component {
     );
   }
 }
+
+RegisterCourseClass.contextType = AuthContext;
 
 export default withRouter(RegisterCourseClass);

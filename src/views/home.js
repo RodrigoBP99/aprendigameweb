@@ -1,11 +1,12 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
-
 import TeacherService from '../app/service/teacherService';
+import { AuthContext } from '../main/authenticationProvider';
 
 class Home extends React.Component {
   state = {
     classesLength: 0,
+    teacher: {},
   };
 
   constructor() {
@@ -13,10 +14,21 @@ class Home extends React.Component {
     this.teacherService = new TeacherService();
   }
 
+  componentDidMount = () => {
+    const teacher = this.context.authenticatedUser;
+    this.setState({ teacher: teacher });
+  };
+
   render() {
     return (
       <div className="jumbotron">
-        <h1 className="display-3">Bem vindo!</h1>
+        <center>
+          <h1 className="display-3">
+            Bem vindo!
+            <br />
+            Professor <i>{this.state.teacher.name}</i>
+          </h1>
+        </center>
         <p className="lead">Esse é seu sistema de controle de Turmas.</p>
         <hr className="my-4" />
         <p>
@@ -42,5 +54,7 @@ class Home extends React.Component {
     );
   }
 }
+
+Home.contextType = AuthContext;
 
 export default withRouter(Home);
