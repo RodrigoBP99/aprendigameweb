@@ -30,7 +30,7 @@ function Navbar(props) {
             />
             <NavbarItem
               render={props.isUserAuthenticated}
-              href="#/"
+              href="#/consult-course"
               label="Cursos"
             />
             <NavbarItem

@@ -3,6 +3,7 @@ import React from 'react';
 import Login from '../views/login';
 import Home from '../views/home';
 import TeacherRegister from '../views/teacherRegister';
+import ConsultCourseUnit from '../views/courseUnit/consultCourseUnit';
 import ConsultCourseClass from '../views/courseClass/consultCourseClass';
 import RegisterCourseClass from '../views/courseClass/registreCourseClass';
 import { AuthConsumer } from './authenticationProvider';
@@ -55,6 +56,11 @@ function Routes(props) {
           isUserAuthenticated={props.isUserAuthenticated}
           path="/register-class/:id?"
           component={RegisterCourseClass}
+        />
+        <AuthenticateRoute
+          isUserAuthenticated={props.isUserAuthenticated}
+          path="/consult-course"
+          component={ConsultCourseUnit}
         />
       </Switch>
     </HashRouter>

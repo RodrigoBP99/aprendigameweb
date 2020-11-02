@@ -4,7 +4,7 @@ import FormGroup from '../components/form-group';
 import { withRouter } from 'react-router-dom';
 
 import TeacherService from '../app/service/teacherService';
-import { successMessage, erroMessage } from '../components/toastr';
+import { erroMessage } from '../components/toastr';
 
 import { AuthContext } from '../main/authenticationProvider';
 
@@ -27,7 +27,6 @@ class Login extends React.Component {
       })
       .then((res) => {
         this.context.iniciateSession(res.data);
-        successMessage('Você logou com sucesso');
         this.props.history.push('/home');
       })
       .catch((erro) => {
