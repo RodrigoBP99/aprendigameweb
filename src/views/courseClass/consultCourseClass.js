@@ -67,7 +67,7 @@ class ConsultCourseClass extends React.Component {
         this.setState({ courseClassList: res.data });
       })
       .catch((erro) => {
-        messages.erroMessage(erro.response.data);
+        messages.erroMessage(erro);
       });
   };
 
@@ -177,6 +177,7 @@ class ConsultCourseClass extends React.Component {
             <div className="bs-component">
               <CourseClassTable
                 courseClass={this.state.courseClassList}
+                teacherLoged={this.context.authenticatedUser}
                 actionEdit={this.editCourseClass}
                 actionOpen={this.openCourseClass}
                 actionDelete={this.openConfirmation}

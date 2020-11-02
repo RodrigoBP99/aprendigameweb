@@ -1,5 +1,7 @@
 import React from 'react';
 
+export var show = false;
+
 export default (props) => {
   const rows = props.courseClass.map((courseClass) => {
     return (
@@ -26,8 +28,12 @@ export default (props) => {
           >
             Abrir <i className="pi pi-check" />
           </button>
+          {props.teacherLoged.id === courseClass.teacher.id
+            ? (show = false)
+            : (show = true)}
           <button
             type="button"
+            hidden={show}
             onClick={(e) => props.actionEdit(courseClass.id)}
             className="btn btn-warning"
           >
@@ -35,6 +41,7 @@ export default (props) => {
           </button>
           <button
             type="button"
+            hidden={show}
             className="btn btn-danger"
             onClick={(e) => props.actionDelete(courseClass)}
           >
