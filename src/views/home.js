@@ -36,7 +36,11 @@ class Home extends React.Component {
           abaixo para navegar pelo sistema.
         </p>
         <p className="lead">
-          <a className="btn btn-primary btn-lg" href="#/home" role="button">
+          <a
+            className="btn btn-primary btn-lg"
+            href="#/consult-course"
+            role="button"
+          >
             <i className="fa fa-users"></i> Cursos
           </a>
           <a

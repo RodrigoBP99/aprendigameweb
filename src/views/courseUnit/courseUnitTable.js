@@ -21,13 +21,6 @@ export default (props) => {
           >
             Editar <i className="pi pi-pencil" />
           </button>
-          {/* <button
-            type="button"
-            className="btn btn-danger"
-            onClick={(e) => props.actionDelete(courseUnit)}
-          >
-            <i className="pi pi-trash" />
-          </button> */}
         </td>
       </tr>
     );

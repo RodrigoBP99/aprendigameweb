@@ -7,7 +7,7 @@ export default class CourseClassService extends ApiService {
   }
 
   search(courseClassFilter) {
-    let params = `?teacher=${courseClassFilter.teacher}`;
+    let params = `?`;
 
     if (courseClassFilter.courseUnit) {
       params = `${params}&courseUnit=${courseClassFilter.courseUnit}`;
@@ -15,6 +15,10 @@ export default class CourseClassService extends ApiService {
 
     if (courseClassFilter.name) {
       params = `${params}&name=${courseClassFilter.name}`;
+    }
+
+    if (courseClassFilter.teacher) {
+      params = `${params}&teacher=${courseClassFilter.teacher}`;
     }
 
     return this.get(params);

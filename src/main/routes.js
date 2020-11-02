@@ -4,8 +4,9 @@ import Login from '../views/login';
 import Home from '../views/home';
 import TeacherRegister from '../views/teacherRegister';
 import ConsultCourseUnit from '../views/courseUnit/consultCourseUnit';
+import RegisterCourseUnit from '../views/courseUnit/registerCourseUnit';
 import ConsultCourseClass from '../views/courseClass/consultCourseClass';
-import RegisterCourseClass from '../views/courseClass/registreCourseClass';
+import RegisterCourseClass from '../views/courseClass/registerCourseClass';
 import { AuthConsumer } from './authenticationProvider';
 
 import { Route, Switch, HashRouter, Redirect } from 'react-router-dom';
@@ -61,6 +62,11 @@ function Routes(props) {
           isUserAuthenticated={props.isUserAuthenticated}
           path="/consult-course"
           component={ConsultCourseUnit}
+        />
+        <AuthenticateRoute
+          isUserAuthenticated={props.isUserAuthenticated}
+          path="/register-course/:id?"
+          component={RegisterCourseUnit}
         />
       </Switch>
     </HashRouter>

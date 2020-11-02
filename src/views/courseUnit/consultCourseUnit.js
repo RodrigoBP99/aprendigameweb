@@ -40,17 +40,14 @@ class ConsultCourseUnit extends React.Component {
       .catch((erro) => {
         messages.erroMessage(erro.response.data);
       });
-
-    console.log(courseUnitFilter);
   };
 
   register = () => {
-    // this.props.history.push('/register-class');
-    console.log('Registrar Curso');
+    this.props.history.push('/register-course');
   };
 
   editCourseClass = (id) => {
-    // this.props.history.push(`/register-class/${id}`);
+    this.props.history.push(`/register-course/${id}`);
     console.log('Editar Curso');
   };
 
