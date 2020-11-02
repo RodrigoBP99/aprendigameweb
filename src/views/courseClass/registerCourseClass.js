@@ -25,7 +25,7 @@ class RegisterCourseClass extends React.Component {
     const params = this.props.match.params;
     if (params.id) {
       this.service
-        .getById(params.id)
+        .findById(params.id)
         .then((res) => {
           this.setState({ ...res.data, update: true });
         })

@@ -36,8 +36,12 @@ export default class CourseClassService extends ApiService {
     return this.put(`/update/${courseClass.id}`, courseClass);
   }
 
-  getById(id) {
+  findById(id) {
     return this.get(`/find/${id}`);
+  }
+
+  getById(id) {
+    return this.get(`/getCourseClass/${id}`);
   }
 
   validate(courseClass) {

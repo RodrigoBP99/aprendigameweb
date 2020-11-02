@@ -35,6 +35,34 @@ class ConsultCourseUnit extends React.Component {
     this.service
       .search(courseUnitFilter)
       .then((res) => {
+        const list = res.data;
+
+        if (list.length < 1) {
+          messages.alertMessage('Nenhuma Turma econtrada');
+        } else if (list.length === 1) {
+          messages.successMessage(`${list.length} Turma foi encontrada`);
+        } else {
+          messages.successMessage(`${list.length} Turmas foram encontradas`);
+        }
+
+        this.setState({ courseUnitList: res.data });
+      })
+      .catch((erro) => {
+        messages.erroMessage(erro.response.data);
+      });
+  };
+  componentDidMount = () => {
+    const logedTeacher = this.context.authenticatedUser;
+
+    const courseUnitFilter = {
+      code: this.state.code,
+      name: this.state.name,
+      teacherId: logedTeacher.id,
+    };
+
+    this.service
+      .search(courseUnitFilter)
+      .then((res) => {
         this.setState({ courseUnitList: res.data });
       })
       .catch((erro) => {
