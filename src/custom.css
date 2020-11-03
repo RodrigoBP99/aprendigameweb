@@ -286,3 +286,7 @@ input[type] {
   border-radius: 0.3rem;
   border: 1px groove;
 }
+
+#buttonRegisterQuizz {
+  position: absolute;
+}
