@@ -12,14 +12,6 @@ class RegisterCourseUnit extends React.Component {
     id: null,
     tittle: '',
     code: '',
-    answer: {
-      text: '',
-      answerType: '',
-    },
-    question: {
-      answers: [],
-      questionTittle: '',
-    },
     courseClassId: null,
     courseClassCode: '',
     update: false,
@@ -36,7 +28,12 @@ class RegisterCourseUnit extends React.Component {
       courseClassId: courseClass.id,
       courseClassCode: courseClass.code,
     });
-    // const params = this.props.match.params;
+
+    const params = this.props.match.params;
+
+    if (params.id) {
+      console.log('Quizz Id: ', params.id);
+    }
   }
 
   cancelRegister = (id) => {
@@ -44,15 +41,16 @@ class RegisterCourseUnit extends React.Component {
   };
 
   saveQuizz = () => {
-    // const { tittle, code, courseClassId } = this.state;
+    const { tittle, code, courseClassId } = this.state;
 
-    // // const quizz = {
-    // //   tittle,
-    // //   code,
-    // //   courseClassId,
-    // // };
+    const quizz = {
+      tittle,
+      code,
+      courseClassId,
+    };
 
-    console.log('Salvar: ', this.state);
+    console.log('Salvar: ', quizz);
+    //salvar questões e respostas
   };
 
   updateQuizz = () => {
@@ -83,13 +81,13 @@ class RegisterCourseUnit extends React.Component {
         >
           <div className="row">
             <div className="col-md-12">
-              <FormGroup htmlFor="inputName" label="Titulo: *">
+              <FormGroup htmlFor="inputTittle" label="Titulo do Quizz: *">
                 <input
                   type="text"
+                  name="tittle"
+                  id="inputTittle"
                   value={this.state.tittle}
                   onChange={this.handleChange}
-                  name="name"
-                  id="inputName"
                   className="form-control"
                   placeholder="Titulo do Questionario"
                 />
@@ -150,7 +148,7 @@ class RegisterCourseUnit extends React.Component {
               <button
                 type="button"
                 className="btn btn-danger"
-                onClick={this.cancelRegister}
+                onClick={(e) => this.cancelRegister(this.state.courseClassId)}
               >
                 Cancelar <i className="pi pi-times" />
               </button>
@@ -160,12 +158,7 @@ class RegisterCourseUnit extends React.Component {
         <Card tittle="Questão 1">
           <div className="row">
             <div className="col-md-12">
-              <input
-                type="text"
-                className="form-control"
-                value={this.state.question.tittle}
-                onChange={this.handleChange}
-              />
+              <input type="text" className="form-control" />
             </div>
           </div>
           <div className="col-md=12">
