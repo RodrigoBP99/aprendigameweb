@@ -288,5 +288,7 @@ input[type] {
 }
 
 #buttonRegister {
+  float: right;
   position: absolute;
+  right: 0px;
 }
