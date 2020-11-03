@@ -27,7 +27,7 @@ function AuthenticateRoute({
           return (
             <Redirect
               to={{
-                pathname: '/login',
+                pathname: '/',
                 state: { from: componentProps.location },
               }}
             />
@@ -42,7 +42,7 @@ function Routes(props) {
   return (
     <HashRouter>
       <Switch>
-        <Route path="/login" component={Login} />
+        <Route path="/" exact component={Login} />
         <Route path="/teacher-register" component={TeacherRegister} />
         <AuthenticateRoute
           isUserAuthenticated={props.isUserAuthenticated}

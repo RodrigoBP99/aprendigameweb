@@ -41,7 +41,7 @@ function Navbar(props) {
             <NavbarItem
               render={props.isUserAuthenticated}
               onClick={props.logout}
-              href="#/login"
+              href="#/"
               label="Sair"
             />
           </ul>
