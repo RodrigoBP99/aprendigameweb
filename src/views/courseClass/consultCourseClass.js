@@ -67,7 +67,7 @@ class ConsultCourseClass extends React.Component {
         this.setState({ courseClassList: res.data });
       })
       .catch((erro) => {
-        messages.erroMessage(erro);
+        messages.erroMessage(erro.response.data);
       });
   };
 

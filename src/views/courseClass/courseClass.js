@@ -2,6 +2,7 @@ import React from 'react';
 import { withRouter } from 'react-router-dom';
 import Card from '../../components/card';
 import CourseClassService from '../../app/service/courseclassService';
+import QuizzService from '../../app/service/quizzService';
 import * as messages from '../../components/toastr';
 import { Dialog } from 'primereact/dialog';
 import { Button } from 'primereact/button';
@@ -14,28 +15,50 @@ class CourseClass extends React.Component {
     courseClass: {},
     showConfirmDialog: false,
     deletedQuizz: {},
-    courseClassList: [],
-    quizzList: {},
+    quizzList: [],
   };
 
   constructor() {
     super();
     this.service = new CourseClassService();
+    this.quizzService = new QuizzService();
   }
 
-  componentDidMount() {
+  async componentDidMount() {
     const params = this.props.match.params;
     if (params.id) {
-      this.service
+      await this.service
         .getById(params.id)
         .then((res) => {
           this.setState({ courseClass: res.data, update: true });
-          console.log(this.state.courseClass);
         })
         .catch((erro) => {
           messages.erroMessage(erro.response.data);
         });
     }
+
+    const quizzFilter = {
+      courseClassId: this.state.courseClass.id,
+    };
+
+    this.quizzService
+      .search(quizzFilter)
+      .then((res) => {
+        const list = res.data;
+
+        if (list.length < 1) {
+          messages.alertMessage('Nenhum quizz econtrada');
+        } else if (list.length === 1) {
+          messages.successMessage(`${list.length} Quizz foi encontrada`);
+        } else {
+          messages.successMessage(`${list.length} Quizzs foram encontradas`);
+        }
+
+        this.setState({ quizzList: res.data });
+      })
+      .catch((erro) => {
+        messages.erroMessage(erro.response.data);
+      });
   }
 
   editQuizz = (id) => {
@@ -46,6 +69,10 @@ class CourseClass extends React.Component {
   openQuizz = (id) => {
     //this.props.history.push(`/courseClass/${id}`);
     console.log('Abrir questionario');
+  };
+
+  registerQuizz = () => {
+    console.log('Criar novo Questionario');
   };
 
   openConfirmation = (quizz) => {
@@ -60,12 +87,12 @@ class CourseClass extends React.Component {
     this.service
       .deleteCourseClass(this.state.deletedQuizz.id)
       .then((res) => {
-        const courseClassList = this.state.courseClassList;
-        const index = courseClassList.indexOf(this.state.deletedQuizz);
-        courseClassList.splice(index, 1);
+        const quizzList = this.state.quizzList;
+        const index = quizzList.indexOf(this.state.deletedQuizz);
+        quizzList.splice(index, 1);
 
         this.setState({
-          courseClassList: courseClassList,
+          quizzList: quizzList,
           showConfirmDialog: false,
         });
 
@@ -186,23 +213,17 @@ class CourseClass extends React.Component {
           </div>
         </Card>
         <Card tittle="Questionarios">
-          <button
-            type="button"
-            onClick={this.search}
-            className="btn btn-success"
-          >
-            Buscar <i className="pi pi-search" />
-          </button>
-          <button
-            type="button"
-            className="btn btn-info"
-            onClick={this.register}
-          >
-            Cadastrar <i className="pi pi-plus" />
-          </button>
           <div className="row">
             <div className="col-lg-12">
               <div className="bs-component">
+                <button
+                  id="buttonRegisterQuizz"
+                  type="button"
+                  className="btn btn-warning"
+                  onClick={this.registerQuizz}
+                >
+                  <i className="pi pi-plus" />
+                </button>
                 <QuizzTable
                   quizz={this.state.quizzList}
                   actionEdit={this.editQuizz}
