@@ -76,7 +76,6 @@ class ConsultCourseUnit extends React.Component {
 
   editCourseClass = (id) => {
     this.props.history.push(`/register-course/${id}`);
-    console.log('Editar Curso');
   };
 
   openCourseClass = (id) => {

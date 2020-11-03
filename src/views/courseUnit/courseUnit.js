@@ -162,6 +162,7 @@ class CourseUnit extends React.Component {
                 </button>
                 <CourseClassTable
                   courseClass={this.state.courseClassList}
+                  teacherLoged={this.context.authenticatedUser}
                   actionEdit={this.editCourseClass}
                   actionOpen={this.openCourseClass}
                   actionDelete={this.openConfirmation}

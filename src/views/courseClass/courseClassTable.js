@@ -6,6 +6,7 @@ export default (props) => {
   const rows = props.courseClass.map((courseClass) => {
     return (
       <tr key={courseClass.id}>
+        <td>{props.courseClass.indexOf(courseClass) + 1}</td>
         <td>{courseClass.code}</td>
         <td>{courseClass.name}</td>
         <td>
@@ -55,6 +56,7 @@ export default (props) => {
     <table className="table table-hover">
       <thead>
         <tr>
+          <th scope="col">Nº</th>
           <th scope="col">Código</th>
           <th scope="col">Nome</th>
           <th scope="col">Curso</th>
