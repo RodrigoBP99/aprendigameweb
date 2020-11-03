@@ -42,7 +42,7 @@ class TeacherRegister extends React.Component {
       .save(teacher)
       .then((res) => {
         messages.successMessage('Usuario cadastrado com sucesso, faça o login');
-        this.props.history.push('/login');
+        this.props.history.push('/');
       })
       .catch((erro) => {
         messages.erroMessage(erro.response.data);
@@ -50,7 +50,7 @@ class TeacherRegister extends React.Component {
   };
 
   cancelRegister = () => {
-    this.props.history.push('/login');
+    this.props.history.push('/');
   };
 
   render() {
