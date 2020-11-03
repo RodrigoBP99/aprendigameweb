@@ -5,6 +5,7 @@ import { withRouter } from 'react-router-dom';
 import CourseClassService from '../../app/service/courseclassService';
 import * as messages from '../../components/toastr';
 import { AuthContext } from '../../main/authenticationProvider';
+import LocalStorageService from '../../app/service/localstorageService';
 
 class RegisterCourseClass extends React.Component {
   state = {
@@ -23,6 +24,7 @@ class RegisterCourseClass extends React.Component {
 
   componentDidMount() {
     const params = this.props.match.params;
+
     if (params.id) {
       this.service
         .findById(params.id)
@@ -32,6 +34,13 @@ class RegisterCourseClass extends React.Component {
         .catch((erro) => {
           messages.erroMessage(erro.response.data);
         });
+    }
+
+    const courseUnit = LocalStorageService.getItem('courseUnit');
+
+    if (courseUnit) {
+      this.setState({ courseUnitCode: courseUnit });
+      LocalStorageService.clearItem('courseUnit');
     }
   }
 

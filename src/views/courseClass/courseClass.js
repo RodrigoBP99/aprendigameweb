@@ -30,7 +30,7 @@ class CourseClass extends React.Component {
       await this.service
         .getById(params.id)
         .then((res) => {
-          this.setState({ courseClass: res.data, update: true });
+          this.setState({ courseClass: res.data });
         })
         .catch((erro) => {
           messages.erroMessage(erro.response.data);
@@ -217,7 +217,7 @@ class CourseClass extends React.Component {
             <div className="col-lg-12">
               <div className="bs-component">
                 <button
-                  id="buttonRegisterQuizz"
+                  id="buttonRegister"
                   type="button"
                   className="btn btn-warning"
                   onClick={this.registerQuizz}

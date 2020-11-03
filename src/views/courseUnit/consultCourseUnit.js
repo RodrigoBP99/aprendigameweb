@@ -80,7 +80,7 @@ class ConsultCourseUnit extends React.Component {
   };
 
   openCourseClass = (id) => {
-    console.log('ir para pagina da Classe');
+    this.props.history.push(`/courseUnit/${id}`);
   };
 
   openConfirmation = (courseClass) => {
