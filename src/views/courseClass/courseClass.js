@@ -9,6 +9,7 @@ import { Button } from 'primereact/button';
 import { AuthContext } from '../../main/authenticationProvider';
 import FormGroup from '../../components/form-group';
 import QuizzTable from '../quizz/quizzTable';
+import LocalStorageService from '../../app/service/localstorageService';
 
 class CourseClass extends React.Component {
   state = {
@@ -62,8 +63,8 @@ class CourseClass extends React.Component {
   }
 
   editQuizz = (id) => {
-    //this.props.history.push(`/register-class/${id}`);
-    console.log('Editar Questionario');
+    this.props.history.push(`/register-class/${id}`);
+    console.log(id);
   };
 
   openQuizz = (id) => {
@@ -71,8 +72,9 @@ class CourseClass extends React.Component {
     console.log('Abrir questionario');
   };
 
-  registerQuizz = () => {
-    console.log('Criar novo Questionario');
+  registerQuizz = (courseClass) => {
+    LocalStorageService.addItem('courseClass', courseClass);
+    this.props.history.push(`/register-quizz`);
   };
 
   openConfirmation = (quizz) => {
@@ -220,7 +222,7 @@ class CourseClass extends React.Component {
                   id="buttonRegister"
                   type="button"
                   className="btn btn-warning"
-                  onClick={this.registerQuizz}
+                  onClick={(e) => this.registerQuizz(this.state.courseClass)}
                 >
                   <i className="pi pi-plus" />
                 </button>

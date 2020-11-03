@@ -262,12 +262,8 @@ input[type]::placeholder {
   font-style: italic;
 }
 
+input[type],
 input[type]:focus {
-  background-color: white;
-  color: #000000;
-}
-
-input[type] {
   background-color: white;
   color: #000000;
 }
@@ -278,6 +274,7 @@ input[type] {
 }
 
 .card {
+  margin-top: 10px;
   border: 1px groove;
 }
 
@@ -291,4 +288,10 @@ input[type] {
   float: right;
   position: absolute;
   right: 0px;
+}
+
+input[type='radio'] {
+  position: absolute;
+  left: 0px;
+  margin: 35px 0 0 0;
 }

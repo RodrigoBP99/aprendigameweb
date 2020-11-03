@@ -9,6 +9,7 @@ import ConsultCourseClass from '../views/courseClass/consultCourseClass';
 import RegisterCourseClass from '../views/courseClass/registerCourseClass';
 import CourseClass from '../views/courseClass/courseClass';
 import CourseUnit from '../views/courseUnit/courseUnit';
+import RegisterQuizz from '../views/quizz/registerQuizz';
 import { AuthConsumer } from './authenticationProvider';
 
 import { Route, Switch, HashRouter, Redirect } from 'react-router-dom';
@@ -79,6 +80,11 @@ function Routes(props) {
           isUserAuthenticated={props.isUserAuthenticated}
           path="/register-course/:id?"
           component={RegisterCourseUnit}
+        />
+        <AuthenticateRoute
+          isUserAuthenticated={props.isUserAuthenticated}
+          path="/register-quizz/:id?"
+          component={RegisterQuizz}
         />
       </Switch>
     </HashRouter>
