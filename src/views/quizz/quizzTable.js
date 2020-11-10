@@ -14,12 +14,19 @@ export default (props) => {
           >
             Abrir <i className="pi pi-check" />
           </button>
-          <button
+          {/* <button
             type="button"
             onClick={(e) => props.actionEdit(quizz.id)}
             className="btn btn-warning"
           >
             Editar <i className="pi pi-pencil" />
+          </button> */}
+          <button
+            type="button"
+            onClick={(e) => props.actionDelete(quizz)}
+            className="btn btn-danger"
+          >
+            Deletar <i className="pi pi-trash" />
           </button>
         </td>
       </tr>

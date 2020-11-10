@@ -22,4 +22,16 @@ export default class QuizzService extends ApiService {
 
     return this.get(params);
   }
+
+  deleteQuizz(id) {
+    return this.delete(`/${id}`);
+  }
+
+  save(quizz) {
+    return this.post('/save', quizz);
+  }
+
+  getById(id) {
+    return this.get(`/getQuizz/${id}`);
+  }
 }

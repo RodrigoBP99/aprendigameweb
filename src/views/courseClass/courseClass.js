@@ -63,7 +63,7 @@ class CourseClass extends React.Component {
   }
 
   editQuizz = (id) => {
-    this.props.history.push(`/register-class/${id}`);
+    //this.props.history.push(`/register-class/${id}`);
     console.log(id);
   };
 
@@ -79,15 +79,16 @@ class CourseClass extends React.Component {
 
   openConfirmation = (quizz) => {
     this.setState({ showConfirmDialog: true, deletedQuizz: quizz });
+    console.log('Quizz: ', quizz);
   };
 
   cancelDeleteQuizz = () => {
     this.setState({ showConfirmDialog: false, deletedQuizz: {} });
   };
 
-  deleteQuizz = () => {
-    this.service
-      .deleteCourseClass(this.state.deletedQuizz.id)
+  delete = () => {
+    this.quizzService
+      .deleteQuizz(this.state.deletedQuizz.id)
       .then((res) => {
         const quizzList = this.state.quizzList;
         const index = quizzList.indexOf(this.state.deletedQuizz);
@@ -98,25 +99,21 @@ class CourseClass extends React.Component {
           showConfirmDialog: false,
         });
 
-        messages.successMessage('Classe deletada com sucesso');
+        messages.successMessage('Quizz apagado com sucesso!');
       })
       .catch((erro) => {
-        messages.erroMessage('Erro ao tentar deletar a Classe');
+        messages.erroMessage('Erro ao apagar o Quizz');
       });
   };
 
   render() {
     const footerDialog = (
       <div>
-        <Button
-          label="Confirmar"
-          icon="pi pi-check"
-          onClick={this.deleteCourseClass}
-        />
+        <Button label="Confirmar" icon="pi pi-check" onClick={this.delete} />
         <Button
           label="Cancelar"
           icon="pi pi-times"
-          onClick={this.cancelDeleteCourseClass}
+          onClick={this.cancelDeleteQuizz}
           className="p-button-secondary"
         />
       </div>
