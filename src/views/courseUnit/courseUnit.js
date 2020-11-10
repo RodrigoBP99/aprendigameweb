@@ -126,7 +126,7 @@ class CourseUnit extends React.Component {
 
     return (
       <>
-        <Card tittle="Turma">
+        <Card tittle="Curso">
           <button
             id="buttonBackPress"
             type="button"
