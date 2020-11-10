@@ -72,7 +72,7 @@ class RegisterCourseUnit extends React.Component {
   updateCourseClass = () => {
     const { name, code, id, teacherId } = this.state;
 
-    const courseClass = {
+    const courseUnit = {
       name,
       code,
       id,
@@ -80,7 +80,7 @@ class RegisterCourseUnit extends React.Component {
     };
 
     this.service
-      .update(courseClass)
+      .update(courseUnit)
       .then((res) => {
         messages.successMessage('Turma atualizada com sucesso');
         this.props.history.push('/consult-course');
