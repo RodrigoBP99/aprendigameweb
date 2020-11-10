@@ -14,6 +14,7 @@ class RegisterCourseClass extends React.Component {
     code: '',
     teacherId: null,
     courseUnitCode: '',
+    disable: false,
     update: false,
   };
 
@@ -39,7 +40,7 @@ class RegisterCourseClass extends React.Component {
     const courseUnit = LocalStorageService.getItem('courseUnit');
 
     if (courseUnit) {
-      this.setState({ courseUnitCode: courseUnit });
+      this.setState({ courseUnitCode: courseUnit, disable: true });
       LocalStorageService.clearItem('courseUnit');
     }
   }
@@ -145,6 +146,7 @@ class RegisterCourseClass extends React.Component {
               <input
                 type="text"
                 name="courseUnitCode"
+                disabled={this.state.disable}
                 value={this.state.courseUnitCode}
                 onChange={this.handleChange}
                 id="inputCourseUnitCode"
