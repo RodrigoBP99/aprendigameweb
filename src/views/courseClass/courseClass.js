@@ -86,6 +86,10 @@ class CourseClass extends React.Component {
     this.setState({ showConfirmDialog: false, deletedQuizz: {} });
   };
 
+  backButton = () => {
+    this.props.history.push('/consult-classes');
+  };
+
   delete = () => {
     this.quizzService
       .deleteQuizz(this.state.deletedQuizz.id)
@@ -122,6 +126,14 @@ class CourseClass extends React.Component {
     return (
       <>
         <Card tittle="Turma">
+          <button
+            id="buttonBackPress"
+            type="button"
+            className="btn btn-danger"
+            onClick={this.backButton}
+          >
+            <i className="pi pi-arrow-left" />
+          </button>
           <div className="row">
             <div className="col-md-6">
               <FormGroup label="Nome">

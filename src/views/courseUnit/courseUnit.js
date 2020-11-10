@@ -103,6 +103,10 @@ class CourseUnit extends React.Component {
       });
   };
 
+  backButton = () => {
+    this.props.history.push('/consult-course');
+  };
+
   render() {
     const footerDialog = (
       <div>
@@ -123,6 +127,14 @@ class CourseUnit extends React.Component {
     return (
       <>
         <Card tittle="Turma">
+          <button
+            id="buttonBackPress"
+            type="button"
+            className="btn btn-danger"
+            onClick={this.backButton}
+          >
+            <i className="pi pi-arrow-left" />
+          </button>
           <div className="row">
             <div className="col-md-6">
               <FormGroup label="Nome">

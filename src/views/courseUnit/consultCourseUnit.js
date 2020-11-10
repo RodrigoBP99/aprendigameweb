@@ -8,6 +8,7 @@ import * as messages from '../../components/toastr';
 import { Dialog } from 'primereact/dialog';
 import { Button } from 'primereact/button';
 import { AuthContext } from '../../main/authenticationProvider';
+import Navbar from '../../components/navbar';
 
 class ConsultCourseUnit extends React.Component {
   state = {
@@ -128,75 +129,78 @@ class ConsultCourseUnit extends React.Component {
     );
 
     return (
-      <Card tittle="Cursos">
-        <div className="row">
-          <div className="col-md-12">
-            <div className="bs-componenet">
-              <FormGroup
-                htmlFor="inputCurseUnitCode"
-                label="Código do Curso: *"
-              >
-                <input
-                  type="text"
-                  className="form-control"
-                  id="inputCurseUnitCode"
-                  value={this.state.code}
-                  onChange={(e) => this.setState({ code: e.target.value })}
-                  placeholder="Digite o Código do Curso"
-                />
-              </FormGroup>
-              <FormGroup htmlFor="inputCurseUnitName" label="Nome do Curso: ">
-                <input
-                  type="text"
-                  className="form-control"
-                  id="inputCurseUnitName"
-                  value={this.state.name}
-                  onChange={(e) => this.setState({ name: e.target.value })}
-                  placeholder="Digite o nome do Curso"
-                />
-              </FormGroup>
-              <button
-                type="button"
-                onClick={this.search}
-                className="btn btn-success"
-              >
-                Buscar <i className="pi pi-search" />
-              </button>
-              <button
-                type="button"
-                className="btn btn-info"
-                onClick={this.register}
-              >
-                Cadastrar <i className="pi pi-plus" />
-              </button>
+      <>
+        <Navbar />
+        <Card tittle="Cursos">
+          <div className="row">
+            <div className="col-md-12">
+              <div className="bs-componenet">
+                <FormGroup
+                  htmlFor="inputCurseUnitCode"
+                  label="Código do Curso: *"
+                >
+                  <input
+                    type="text"
+                    className="form-control"
+                    id="inputCurseUnitCode"
+                    value={this.state.code}
+                    onChange={(e) => this.setState({ code: e.target.value })}
+                    placeholder="Digite o Código do Curso"
+                  />
+                </FormGroup>
+                <FormGroup htmlFor="inputCurseUnitName" label="Nome do Curso: ">
+                  <input
+                    type="text"
+                    className="form-control"
+                    id="inputCurseUnitName"
+                    value={this.state.name}
+                    onChange={(e) => this.setState({ name: e.target.value })}
+                    placeholder="Digite o nome do Curso"
+                  />
+                </FormGroup>
+                <button
+                  type="button"
+                  onClick={this.search}
+                  className="btn btn-success"
+                >
+                  Buscar <i className="pi pi-search" />
+                </button>
+                <button
+                  type="button"
+                  className="btn btn-info"
+                  onClick={this.register}
+                >
+                  Cadastrar <i className="pi pi-plus" />
+                </button>
+              </div>
             </div>
           </div>
-        </div>
-        <div className="row">
-          <div className="col-lg-12">
-            <div className="bs-component">
-              <CourseUnitTable
-                courseUnit={this.state.courseUnitList}
-                actionEdit={this.editCourseClass}
-                actionOpen={this.openCourseClass}
-                //actionDelete={this.openConfirmation}
-              ></CourseUnitTable>
+          <div className="row">
+            <div className="col-lg-12">
+              <div className="bs-component">
+                <CourseUnitTable
+                  courseUnit={this.state.courseUnitList}
+                  actionEdit={this.editCourseClass}
+                  actionOpen={this.openCourseClass}
+                  //actionDelete={this.openConfirmation}
+                ></CourseUnitTable>
+              </div>
             </div>
           </div>
-        </div>
-        <div>
-          <Dialog
-            header="Confirmação"
-            visible={this.state.showConfirmDialog}
-            style={{ width: '50vw' }}
-            modal={true}
-            onHide={() => this.setState({ showConfirmDialog: false })}
-            footer={footerDialog}
-          >
-            Você deseja mesmo deletar essa Turma?
-          </Dialog>
-        </div>
-      </Card>
+          <div>
+            <Dialog
+              header="Confirmação"
+              visible={this.state.showConfirmDialog}
+              style={{ width: '50vw' }}
+              modal={true}
+              onHide={() => this.setState({ showConfirmDialog: false })}
+              footer={footerDialog}
+            >
+              Você deseja mesmo deletar essa Turma?
+            </Dialog>
+          </div>
+        </Card>
+      </>
     );
   }
 }

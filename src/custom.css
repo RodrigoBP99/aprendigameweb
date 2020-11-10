@@ -290,6 +290,13 @@ input[type]:focus {
   right: 0px;
 }
 
+#buttonBackPress {
+  float: left;
+  position: absolute;
+  left: 2px;
+  top: 0px;
+}
+
 input[type='radio'] {
   position: absolute;
   left: 0px;
