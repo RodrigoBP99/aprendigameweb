@@ -5,7 +5,9 @@ export default (props) => {
     return (
       <tr key={quizz.id}>
         <td>{quizz.code}</td>
-        <td>{quizz.tittle}</td>
+        <td>{quizz.title}</td>
+        <td>{quizz.amountOfQuestions}</td>
+        <td>{quizz.value}</td>
         <td>
           <button
             type="button"
@@ -38,6 +40,8 @@ export default (props) => {
         <tr>
           <th scope="col">Código</th>
           <th scope="col">Titulo</th>
+          <th scope="col">Nº Questões</th>
+          <th scope="col">Valor</th>
           <th scope="col">Ações</th>
         </tr>
       </thead>
