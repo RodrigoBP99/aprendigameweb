@@ -19,13 +19,16 @@ toastr.options = {
 };
 
 export function erroMessage(mensagem) {
+  toastr.clear();
   toastr.error(mensagem);
 }
 
 export function successMessage(mensagem) {
+  toastr.clear();
   toastr.success(mensagem);
 }
 
 export function alertMessage(mensagem) {
+  toastr.clear();
   toastr.warning(mensagem);
 }
