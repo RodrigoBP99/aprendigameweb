@@ -6,7 +6,6 @@ import CourseClassService from '../../app/service/courseclassService';
 import * as messages from '../../components/toastr';
 import { AuthContext } from '../../main/authenticationProvider';
 import FormGroup from '../../components/form-group';
-import LocalStorageService from '../../app/service/localstorageService';
 import CourseUnitCourseClass from '../courseClass/courseUnitCourseClass';
 import CourseUnitTeacher from '../teacher/courseUnitTeacher';
 
@@ -40,47 +39,6 @@ class CourseUnit extends React.Component {
         });
     }
   }
-
-  editCourseClass = (id) => {
-    this.props.history.push(`/register-class/${id}`);
-  };
-
-  openCourseClass = (id) => {
-    this.props.history.push(`/courseClass/${id}`);
-  };
-
-  registerCourseClass = (courseUnitCode) => {
-    LocalStorageService.addItem('courseUnit', courseUnitCode);
-    this.props.history.push('/register-class/');
-  };
-
-  openConfirmation = (courseClass) => {
-    this.setState({ showConfirmDialog: true, deletedCourseClass: courseClass });
-  };
-
-  cancelDeleteCourseClass = () => {
-    this.setState({ showConfirmDialog: false, deletedCourseClass: {} });
-  };
-
-  deleteCourseClass = () => {
-    this.service
-      .deletecourseUnit(this.state.deletedCourseClass.id)
-      .then((res) => {
-        const quizzList = this.state.quizzList;
-        const index = quizzList.indexOf(this.state.deletedCourseClass);
-        quizzList.splice(index, 1);
-
-        this.setState({
-          quizzList: quizzList,
-          showConfirmDialog: false,
-        });
-
-        messages.successMessage('Turma deletada com sucesso');
-      })
-      .catch((erro) => {
-        messages.erroMessage('Erro ao tentar deletar a Turma');
-      });
-  };
 
   backButton = () => {
     this.props.history.push('/consult-course');

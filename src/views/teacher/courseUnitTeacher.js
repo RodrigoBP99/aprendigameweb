@@ -12,9 +12,11 @@ import LocalStorageService from '../../app/service/localstorageService';
 
 class CourseUnitTeacher extends React.Component {
   state = {
-    showConfirmDialog: false,
-    deletedTeacher: {},
+    showDeleteConfirmDialog: false,
+    showAddConfirmDialog: false,
+    deletedTeacher: null,
     teacherList: [],
+    includeTeacherRegistration: '',
   };
 
   constructor() {
@@ -42,38 +44,64 @@ class CourseUnitTeacher extends React.Component {
     LocalStorageService.clearItem();
   }
 
-  registerTeacher = (courseUnitCode) => {
-    //this.props.history.push('/register-class/');
-    console.log(this.state.teacherList);
-  };
-
   openConfirmation = (teacher) => {
-    this.setState({ showConfirmDialog: true, deleteTeacher: teacher });
+    this.setState({ showDeleteConfirmDialog: true });
+    this.setState({ deletedTeacher: teacher });
   };
 
   cancelDeleteCourseClass = () => {
-    this.setState({ showConfirmDialog: false, deletedCourseClass: {} });
+    this.setState({ showDeleteConfirmDialog: false, deletedCourseClass: {} });
   };
 
   deleteTeacher = () => {
     console.log(this.state.deletedTeacher);
-    // this.courseUnitService
-    //   .removeteacher(this.props.courseUnit, this.state.deletedTeacher)
-    //   .then((res) => {
-    //     const teacherList = this.state.teacherList;
-    //     const index = teacherList.indexOf(this.state.deletedTeacher);
-    //     teacherList.splice(index, 1);
+    this.courseUnitService
+      .removeteacher(this.props.courseUnit, this.state.deletedTeacher)
+      .then((res) => {
+        const teacherList = this.state.teacherList;
+        const index = teacherList.indexOf(this.state.deletedTeacher);
+        teacherList.splice(index, 1);
 
-    //     this.setState({
-    //       teacherList: teacherList,
-    //       showConfirmDialog: false,
-    //     });
+        this.setState({
+          teacherList: teacherList,
+          showDeleteConfirmDialog: false,
+        });
 
-    //     messages.successMessage('Professor(a) deletado(a) com sucesso');
-    //   })
-    //   .catch((erro) => {
-    //     messages.erroMessage('Erro ao executar Ação');
-    //   });
+        messages.successMessage('Professor(a) deletado(a) com sucesso');
+      })
+      .catch((erro) => {
+        messages.erroMessage('Erro ao executar Ação');
+      });
+  };
+
+  openConfirmationAdd = () => {
+    this.setState({ showAddConfirmDialog: true });
+  };
+
+  cancelAddTeacher = () => {
+    this.setState({
+      showAddConfirmDialog: false,
+      includeTeacherRegistration: '',
+    });
+  };
+
+  registerTeacher = () => {
+    const courseUnit = this.props.courseUnit;
+    const teacherRegistration = this.state.includeTeacherRegistration;
+
+    this.courseUnitService
+      .includeTeacher(courseUnit, teacherRegistration)
+      .then((res) => {
+        const teacherList = this.state.teacherList;
+        teacherList.includes(res.data);
+
+        this.setState({ teacherList: teacherList });
+
+        messages.successMessage('Professor incluido com sucesso!');
+      })
+      .catch((erro) => {
+        messages.erroMessage('Parece que ocorreu um erro!');
+      });
   };
 
   backButton = () => {
@@ -87,6 +115,22 @@ class CourseUnitTeacher extends React.Component {
           label="Confirmar"
           icon="pi pi-check"
           onClick={this.deleteTeacher}
+        />
+        <Button
+          label="Cancelar"
+          icon="pi pi-times"
+          onClick={this.cancelAddTeacher}
+          className="p-button-secondary"
+        />
+      </div>
+    );
+
+    const footerDialogAdd = (
+      <div>
+        <Button
+          label="Confirmar"
+          icon="pi pi-check"
+          onClick={this.registerTeacher}
         />
         <Button
           label="Cancelar"
@@ -107,9 +151,7 @@ class CourseUnitTeacher extends React.Component {
                   id="buttonRegister"
                   type="button"
                   className="btn btn-warning"
-                  onClick={(e) =>
-                    this.registerTeacher(this.props.courseUnit.code)
-                  }
+                  onClick={this.openConfirmationAdd}
                 >
                   <i className="pi pi-plus" />
                 </button>
@@ -124,13 +166,33 @@ class CourseUnitTeacher extends React.Component {
           <div>
             <Dialog
               header="Confirmação"
-              visible={this.state.showConfirmDialog}
+              visible={this.state.showDeleteConfirmDialog}
               style={{ width: '50vw' }}
               modal={true}
-              onHide={() => this.setState({ showConfirmDialog: false })}
+              onHide={() => this.setState({ showDeleteConfirmDialog: false })}
               footer={footerDialog}
             >
               Você deseja mesmo deletar essa Turma?
+            </Dialog>
+
+            <Dialog
+              header="Adicionar Professor"
+              visible={this.state.showAddConfirmDialog}
+              style={{ width: '50vw' }}
+              modal={true}
+              onHide={() => this.setState({ showAddConfirmDialog: false })}
+              footer={footerDialogAdd}
+            >
+              Digite a matricula do professor que deseja incluir
+              <input
+                type="text"
+                placeholder="TH0000"
+                className="form-control"
+                value={this.state.includeTeacherRegistration}
+                onChange={(e) =>
+                  this.setState({ includeTeacherRegistration: e.target.value })
+                }
+              />
             </Dialog>
           </div>
         </Card>
