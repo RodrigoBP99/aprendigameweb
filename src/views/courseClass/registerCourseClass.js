@@ -28,9 +28,16 @@ class RegisterCourseClass extends React.Component {
 
     if (params.id) {
       this.service
-        .findById(params.id)
+        .getById(params.id)
         .then((res) => {
-          this.setState({ ...res.data, update: true });
+          const courseClass = res.data;
+          this.setState({
+            name: courseClass.name,
+            code: courseClass.code,
+            teacherId: courseClass.teacher.id,
+            courseUnitCode: courseClass.courseUnit.code,
+            update: true,
+          });
         })
         .catch((erro) => {
           messages.erroMessage(erro.response.data);
