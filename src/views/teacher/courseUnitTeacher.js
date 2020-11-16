@@ -54,24 +54,29 @@ class CourseUnitTeacher extends React.Component {
   };
 
   deleteTeacher = () => {
-    console.log(this.state.deletedTeacher);
-    this.courseUnitService
-      .removeteacher(this.props.courseUnit, this.state.deletedTeacher)
-      .then((res) => {
-        const teacherList = this.state.teacherList;
-        const index = teacherList.indexOf(this.state.deletedTeacher);
-        teacherList.splice(index, 1);
+    const teacherList = this.state.teacherList;
 
-        this.setState({
-          teacherList: teacherList,
-          showDeleteConfirmDialog: false,
+    if (teacherList.length === 1) {
+      messages.erroMessage('Não é possivel deixar o curso sem professores');
+    } else {
+      this.courseUnitService
+        .removeteacher(this.props.courseUnit, this.state.deletedTeacher)
+        .then((res) => {
+          const index = teacherList.indexOf(this.state.deletedTeacher);
+          teacherList.splice(index, 1);
+
+          this.setState({
+            teacherList: teacherList,
+            showDeleteConfirmDialog: false,
+          });
+
+          messages.successMessage('Professor(a) deletado(a) com sucesso');
+          this.backButton();
+        })
+        .catch((erro) => {
+          messages.erroMessage('Erro ao executar Ação');
         });
-
-        messages.successMessage('Professor(a) deletado(a) com sucesso');
-      })
-      .catch((erro) => {
-        messages.erroMessage('Erro ao executar Ação');
-      });
+    }
   };
 
   openConfirmationAdd = () => {
@@ -93,14 +98,17 @@ class CourseUnitTeacher extends React.Component {
       .includeTeacher(courseUnit, teacherRegistration)
       .then((res) => {
         const teacherList = this.state.teacherList;
-        teacherList.includes(res.data);
+        teacherList.push(res.data);
+
+        console.log(teacherList);
+        console.log(res.data);
 
         this.setState({ teacherList: teacherList });
 
         messages.successMessage('Professor incluido com sucesso!');
       })
       .catch((erro) => {
-        messages.erroMessage('Parece que ocorreu um erro!');
+        messages.erroMessage(erro.response.data);
       });
   };
 
@@ -119,7 +127,7 @@ class CourseUnitTeacher extends React.Component {
         <Button
           label="Cancelar"
           icon="pi pi-times"
-          onClick={this.cancelAddTeacher}
+          onClick={this.cancelDeleteCourseClass}
           className="p-button-secondary"
         />
       </div>
@@ -135,7 +143,7 @@ class CourseUnitTeacher extends React.Component {
         <Button
           label="Cancelar"
           icon="pi pi-times"
-          onClick={this.cancelDeleteCourseClass}
+          onClick={this.cancelAddTeacher}
           className="p-button-secondary"
         />
       </div>
