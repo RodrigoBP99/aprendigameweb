@@ -3,13 +3,12 @@ import { withRouter } from 'react-router-dom';
 import Card from '../../components/card';
 import CourseUnitService from '../../app/service/courseunitService';
 import CourseClassService from '../../app/service/courseclassService';
-import CourseClassTable from '../courseClass/courseClassTable';
 import * as messages from '../../components/toastr';
-import { Dialog } from 'primereact/dialog';
-import { Button } from 'primereact/button';
 import { AuthContext } from '../../main/authenticationProvider';
 import FormGroup from '../../components/form-group';
 import LocalStorageService from '../../app/service/localstorageService';
+import CourseUnitCourseClass from '../courseClass/courseUnitCourseClass';
+import CourseUnitTeacher from '../teacher/courseUnitTeacher';
 
 class CourseUnit extends React.Component {
   state = {
@@ -17,6 +16,8 @@ class CourseUnit extends React.Component {
     showConfirmDialog: false,
     deletedCourseClass: {},
     courseClassList: [],
+    teacherVisibility: false,
+    courseClassVisibity: false,
   };
 
   constructor() {
@@ -32,34 +33,12 @@ class CourseUnit extends React.Component {
         .getById(params.id)
         .then((res) => {
           this.setState({ courseUnit: res.data });
+          this.getCourseClass();
         })
         .catch((erro) => {
           messages.erroMessage(erro.response.data);
         });
     }
-
-    const courseClassFilter = {
-      courseUnit: this.state.courseUnit.code,
-    };
-
-    this.courseClassService
-      .search(courseClassFilter)
-      .then((res) => {
-        const list = res.data;
-
-        if (list.length < 1) {
-          messages.alertMessage('Nenhuma Turma econtrada');
-        } else if (list.length === 1) {
-          messages.successMessage(`${list.length} Turma foi encontrada`);
-        } else {
-          messages.successMessage(`${list.length} Turmas foram encontradas`);
-        }
-
-        this.setState({ courseClassList: res.data });
-      })
-      .catch((erro) => {
-        messages.erroMessage(erro.response.data);
-      });
   }
 
   editCourseClass = (id) => {
@@ -107,23 +86,21 @@ class CourseUnit extends React.Component {
     this.props.history.push('/consult-course');
   };
 
-  render() {
-    const footerDialog = (
-      <div>
-        <Button
-          label="Confirmar"
-          icon="pi pi-check"
-          onClick={this.deleteCourseClass}
-        />
-        <Button
-          label="Cancelar"
-          icon="pi pi-times"
-          onClick={this.cancelDeleteCourseClass}
-          className="p-button-secondary"
-        />
-      </div>
-    );
+  getCourseClass = () => {
+    this.setState({
+      teacherVisibility: false,
+      courseClassVisibity: true,
+    });
+  };
 
+  getTeachers = () => {
+    this.setState({
+      courseClassVisibity: false,
+      teacherVisibility: true,
+    });
+  };
+
+  render() {
     return (
       <>
         <Card tittle="Curso">
@@ -156,45 +133,35 @@ class CourseUnit extends React.Component {
                 />
               </FormGroup>
             </div>
-          </div>
-        </Card>
-        <Card tittle="Turmas">
-          <div className="row">
-            <div className="col-lg-12">
-              <div className="bs-component">
-                <button
-                  id="buttonRegister"
-                  type="button"
-                  className="btn btn-warning"
-                  onClick={(e) =>
-                    this.registerCourseClass(this.state.courseUnit.code)
-                  }
-                >
-                  <i className="pi pi-plus" />
-                </button>
-                <CourseClassTable
-                  courseClass={this.state.courseClassList}
-                  teacherLoged={this.context.authenticatedUser}
-                  actionEdit={this.editCourseClass}
-                  actionOpen={this.openCourseClass}
-                  actionDelete={this.openConfirmation}
-                ></CourseClassTable>
-              </div>
+            <div id="filterButtons" className="row">
+              <button
+                type="button"
+                className="btn btn-info"
+                onClick={this.getCourseClass}
+              >
+                Turmas
+              </button>
+              <button
+                type="button"
+                className="btn btn-info"
+                onClick={this.getTeachers}
+              >
+                Professores
+              </button>
             </div>
           </div>
-          <div>
-            <Dialog
-              header="Confirmação"
-              visible={this.state.showConfirmDialog}
-              style={{ width: '50vw' }}
-              modal={true}
-              onHide={() => this.setState({ showConfirmDialog: false })}
-              footer={footerDialog}
-            >
-              Você deseja mesmo deletar essa Turma?
-            </Dialog>
-          </div>
         </Card>
+
+        {this.state.courseClassVisibity === true ? (
+          <CourseUnitCourseClass courseUnit={this.state.courseUnit} />
+        ) : (
+          ''
+        )}
+        {this.state.teacherVisibility === true ? (
+          <CourseUnitTeacher courseUnit={this.state.courseUnit} />
+        ) : (
+          ''
+        )}
       </>
     );
   }
