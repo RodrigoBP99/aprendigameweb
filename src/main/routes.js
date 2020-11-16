@@ -2,7 +2,7 @@ import React from 'react';
 
 import Login from '../views/login';
 import Home from '../views/home';
-import TeacherRegister from '../views/teacherRegister';
+import TeacherRegister from '../views/teacher/teacherRegister';
 import ConsultCourseUnit from '../views/courseUnit/consultCourseUnit';
 import RegisterCourseUnit from '../views/courseUnit/registerCourseUnit';
 import ConsultCourseClass from '../views/courseClass/consultCourseClass';

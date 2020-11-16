@@ -1,10 +1,10 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
-import Card from '../components/card';
-import FormGroup from '../components/form-group';
+import Card from '../../components/card';
+import FormGroup from '../../components/form-group';
 
-import TeacherService from '../app/service/teacherService';
-import * as messages from '../components/toastr';
+import TeacherService from '../../app/service/teacherService';
+import * as messages from '../../components/toastr';
 
 class TeacherRegister extends React.Component {
   state = {
