@@ -22,27 +22,30 @@ export default (props) => {
           {courseClass.teacher === null ? '' : courseClass.teacher.registration}
         </td>
         <td>
-          <button
-            type="button"
-            className="btn btn-success"
-            onClick={(e) => props.actionOpen(courseClass.id)}
-          >
-            Abrir <i className="pi pi-check" />
-          </button>
           {props.teacherLoged.id === courseClass.teacher.id
             ? (show = false)
             : (show = true)}
           <button
             type="button"
-            hidden={show}
+            disabled={show}
+            className="btn btn-success"
+            onClick={(e) => props.actionOpen(courseClass.id)}
+          >
+            Abrir <i className="pi pi-check" />
+          </button>
+
+          <button
+            type="button"
+            disabled={show}
             onClick={(e) => props.actionEdit(courseClass.id)}
             className="btn btn-warning"
           >
             Editar <i className="pi pi-pencil" />
           </button>
+
           <button
             type="button"
-            hidden={show}
+            disabled={show}
             className="btn btn-danger"
             onClick={(e) => props.actionDelete(courseClass)}
           >
