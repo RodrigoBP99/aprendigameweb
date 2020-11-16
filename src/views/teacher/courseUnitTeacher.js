@@ -1,4 +1,4 @@
-rotraimport React from 'react';
+import React from 'react';
 import { withRouter } from 'react-router-dom';
 import Card from '../../components/card';
 import * as messages from '../../components/toastr';
