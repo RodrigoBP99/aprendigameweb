@@ -39,6 +39,24 @@ class TeacherService extends ApiService {
       throw new ValidationErro(msgs);
     }
   }
+
+  search(teacherFilter) {
+    let params = `?`;
+
+    if (teacherFilter.courseUnitId) {
+      params = `${params}&courseUnitId=${teacherFilter.courseUnitId}`;
+    }
+
+    if (teacherFilter.registration) {
+      params = `${params}&registration=${teacherFilter.registration}`;
+    }
+
+    if (teacherFilter.name) {
+      params = `${params}&name=${teacherFilter.name}`;
+    }
+
+    return this.get(params);
+  }
 }
 
 export default TeacherService;
