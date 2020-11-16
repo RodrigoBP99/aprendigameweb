@@ -7,6 +7,7 @@ import { AuthContext } from '../../main/authenticationProvider';
 import FormGroup from '../../components/form-group';
 import CourseClassQuizz from '../quizz/courseClassQuizz';
 import CourseClassPresencs from '../presencs/courseClassPresencs';
+import CourseClassStudent from '../student/courseClassStudent';
 
 class CourseClass extends React.Component {
   state = {
@@ -198,6 +199,12 @@ class CourseClass extends React.Component {
 
         {this.state.presencsVivibility === true ? (
           <CourseClassPresencs courseClass={this.state.courseClass} />
+        ) : (
+          ''
+        )}
+
+        {this.state.studentVivibility === true ? (
+          <CourseClassStudent courseClass={this.state.courseClass} />
         ) : (
           ''
         )}
