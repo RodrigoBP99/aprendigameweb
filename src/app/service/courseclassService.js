@@ -40,6 +40,14 @@ export default class CourseClassService extends ApiService {
     return this.get(`/getCourseClass/${id}`);
   }
 
+  includeStudent(courseClass, studentRegistration) {
+    return this.put(`/${courseClass.id}/includestudent`, studentRegistration);
+  }
+
+  removeStudent(courseClass, student) {
+    return this.put(`/${courseClass.id}/removestudent/${student.id}`);
+  }
+
   validate(courseClass) {
     const erros = [];
 
