@@ -32,6 +32,7 @@ class CourseClass extends React.Component {
         .getById(params.id)
         .then((res) => {
           this.setState({ courseClass: res.data });
+          this.getQuizz();
         })
         .catch((erro) => {
           messages.erroMessage(erro.response.data);
@@ -172,21 +173,21 @@ class CourseClass extends React.Component {
                 className="btn btn-info"
                 onClick={this.getQuizz}
               >
-                Questionarios
+                Questionarios <i class="pi pi-list" />
               </button>
               <button
                 type="button"
                 className="btn btn-info"
                 onClick={this.getStudents}
               >
-                Alunos
+                Alunos <i class="pi pi-users" />
               </button>
               <button
                 type="button"
                 className="btn btn-info"
                 onClick={this.getPresencs}
               >
-                Presenças
+                Presenças <i class="pi pi-calendar" />
               </button>
             </div>
           </div>

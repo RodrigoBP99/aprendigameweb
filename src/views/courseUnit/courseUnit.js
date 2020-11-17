@@ -97,14 +97,14 @@ class CourseUnit extends React.Component {
                 className="btn btn-info"
                 onClick={this.getCourseClass}
               >
-                Turmas
+                Turmas <i class="pi pi-list" />
               </button>
               <button
                 type="button"
                 className="btn btn-info"
                 onClick={this.getTeachers}
               >
-                Professores
+                Professores <i class="pi pi-users" />
               </button>
             </div>
           </div>
