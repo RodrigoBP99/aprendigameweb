@@ -29,7 +29,7 @@ class Home extends React.Component {
             <h1 className="display-3">
               Bem vindo!
               <br />
-              Professor <i>{this.state.teacher.name}</i>
+              Professor(a) <i>{this.state.teacher.name}</i>
             </h1>
           </center>
           <p className="lead">Esse é seu sistema de controle de Turmas.</p>
