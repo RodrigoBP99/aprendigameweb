@@ -14,6 +14,15 @@ export default (props) => {
         <td>
           {presenc.student.registration} <br /> {presenc.student.name}
         </td>
+        <td>
+          <button
+            type="button"
+            className="btn btn-danger"
+            onClick={(e) => props.actionDelete(presenc)}
+          >
+            <i className="pi pi-trash" />
+          </button>
+        </td>
       </tr>
     );
   });
@@ -27,6 +36,7 @@ export default (props) => {
           <th scope="col">Data</th>
           <th scope="col">Hora</th>
           <th scope="col">Aluno</th>
+          <th scope="col">Ações</th>
         </tr>
       </thead>
       <tbody>{rows}</tbody>

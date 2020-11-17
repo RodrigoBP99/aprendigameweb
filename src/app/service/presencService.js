@@ -22,6 +22,10 @@ class PresencService extends ApiService {
 
     return this.get(params);
   }
+
+  deletePresenc(id) {
+    return this.delete(`/${id}`);
+  }
 }
 
 export default PresencService;
