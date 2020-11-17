@@ -5,8 +5,6 @@ import FormGroup from '../../components/form-group';
 import CourseUnitTable from './courseUnitTable';
 import CourseUnitService from '../../app/service/courseunitService';
 import * as messages from '../../components/toastr';
-import { Dialog } from 'primereact/dialog';
-import { Button } from 'primereact/button';
 import { AuthContext } from '../../main/authenticationProvider';
 import Navbar from '../../components/navbar';
 
@@ -14,8 +12,6 @@ class ConsultCourseUnit extends React.Component {
   state = {
     code: '',
     name: '',
-    showConfirmDialog: false,
-    deletedCourseUnit: {},
     courseUnitList: [],
   };
 
@@ -83,51 +79,7 @@ class ConsultCourseUnit extends React.Component {
     this.props.history.push(`/courseUnit/${id}`);
   };
 
-  openConfirmation = (courseClass) => {
-    this.setState({ showConfirmDialog: true, deletedCourseUnit: courseClass });
-  };
-
-  cancelDeleteCourseClass = () => {
-    this.setState({ showConfirmDialog: false, deletedCourseUnit: {} });
-  };
-
-  deleteCourseClass = () => {
-    this.service
-      .deleteCourseClass(this.state.deletedCourseUnit.id)
-      .then((res) => {
-        const courseUnitList = this.state.courseUnitList;
-        const index = courseUnitList.indexOf(this.state.deletedCourseUnit);
-        courseUnitList.splice(index, 1);
-
-        this.setState({
-          courseUnitList: courseUnitList,
-          showConfirmDialog: false,
-        });
-
-        messages.successMessage('Classe deletada com sucesso');
-      })
-      .catch((erro) => {
-        messages.erroMessage('Erro ao tentar deletar a Classe');
-      });
-  };
-
   render() {
-    const footerDialog = (
-      <div>
-        <Button
-          label="Confirmar"
-          icon="pi pi-check"
-          onClick={this.deleteCourseClass}
-        />
-        <Button
-          label="Cancelar"
-          icon="pi pi-times"
-          onClick={this.cancelDeleteCourseClass}
-          className="p-button-secondary"
-        />
-      </div>
-    );
-
     return (
       <>
         <Navbar />
@@ -182,23 +134,11 @@ class ConsultCourseUnit extends React.Component {
                   courseUnit={this.state.courseUnitList}
                   actionEdit={this.editCourseClass}
                   actionOpen={this.openCourseClass}
-                  //actionDelete={this.openConfirmation}
                 ></CourseUnitTable>
               </div>
             </div>
           </div>
-          <div>
-            <Dialog
-              header="Confirmação"
-              visible={this.state.showConfirmDialog}
-              style={{ width: '50vw' }}
-              modal={true}
-              onHide={() => this.setState({ showConfirmDialog: false })}
-              footer={footerDialog}
-            >
-              Você deseja mesmo deletar essa Turma?
-            </Dialog>
-          </div>
+          <div></div>
         </Card>
       </>
     );

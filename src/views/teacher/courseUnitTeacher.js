@@ -201,7 +201,7 @@ class CourseUnitTeacher extends React.Component {
               onHide={() => this.setState({ showDeleteConfirmDialog: false })}
               footer={footerDialog}
             >
-              Você deseja mesmo deletar essa Turma?
+              <h4>Você deseja mesmo sair do Curso?</h4>
             </Dialog>
 
             <Dialog
@@ -235,7 +235,7 @@ class CourseUnitTeacher extends React.Component {
               }
               footer={footerDialogAdd}
             >
-              Digite a matricula do professor que deseja incluir
+              <h4>Digite a matricula do professor que deseja incluir</h4>
               <input
                 type="text"
                 placeholder="TH0000"

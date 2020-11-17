@@ -13,7 +13,6 @@ import CourseUnitStudent from '../student/courseUnitStudent';
 class CourseUnit extends React.Component {
   state = {
     courseUnit: {},
-    showConfirmDialog: false,
     deletedCourseClass: {},
     courseClassList: [],
     teacherVisibility: false,

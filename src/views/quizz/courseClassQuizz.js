@@ -128,7 +128,7 @@ class CourseClassQuizz extends React.Component {
               onHide={() => this.setState({ showConfirmDialog: false })}
               footer={footerDialog}
             >
-              Você deseja mesmo deletar essa Turma?
+              <h4>Você deseja mesmo deletar esse Quizz?</h4>
             </Dialog>
           </div>
         </Card>

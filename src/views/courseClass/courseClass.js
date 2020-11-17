@@ -12,7 +12,6 @@ import CourseClassStudent from '../student/courseClassStudent';
 class CourseClass extends React.Component {
   state = {
     courseClass: {},
-    showConfirmDialog: false,
     deletedQuizz: {},
     quizzList: [],
     studentVivibility: false,

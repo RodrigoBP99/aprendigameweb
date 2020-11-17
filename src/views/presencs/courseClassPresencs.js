@@ -101,7 +101,7 @@ class CourseClassPresenc extends React.Component {
               onHide={() => this.setState({ showConfirmDeleteDialog: false })}
               footer={footerDialog}
             >
-              Você deseja mesmo deletar essa Presença?
+              <h4>Você deseja mesmo deletar essa Presença?</h4>
             </Dialog>
           </div>
         </Card>

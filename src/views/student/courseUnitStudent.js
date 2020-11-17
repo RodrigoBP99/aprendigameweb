@@ -159,7 +159,7 @@ class CourseUnitStudent extends React.Component {
               }
               footer={footerDialogAdd}
             >
-              Digite a matricula do Aluno que deseja incluir
+              <h4>Digite a matricula do Aluno que deseja incluir</h4>
               <input
                 type="text"
                 placeholder="ST0000"
@@ -183,7 +183,7 @@ class CourseUnitStudent extends React.Component {
               }
               footer={footerDialogDelete}
             >
-              Tem certeza que dejeza retirar o aluno da Turma?
+              <h4>Tem certeza que dejeza retirar o aluno do Curso?</h4>
             </Dialog>
           </div>
         </Card>
