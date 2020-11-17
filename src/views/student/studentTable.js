@@ -18,7 +18,7 @@ export default (props) => {
             onClick={(e) => props.actionDelete(student)}
             className="btn btn-danger"
           >
-            Deletar <i className="pi pi-trash" />
+            Remover <i class="pi pi-user-minus" />
           </button>
         </td>
       </tr>
