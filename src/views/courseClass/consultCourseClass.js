@@ -73,7 +73,10 @@ class ConsultCourseClass extends React.Component {
   };
 
   register = () => {
-    this.props.history.push('/register-class');
+    this.props.history.push('/consult-course');
+    messages.alertMessage(
+      `A turma deve ser criada a partir de um Curso. Vá ao curso ao qual deseja criar a Turma`
+    );
   };
 
   editCourseClass = (id) => {
