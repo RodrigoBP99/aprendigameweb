@@ -8,6 +8,7 @@ import { AuthContext } from '../../main/authenticationProvider';
 import FormGroup from '../../components/form-group';
 import CourseUnitCourseClass from '../courseClass/courseUnitCourseClass';
 import CourseUnitTeacher from '../teacher/courseUnitTeacher';
+import CourseUnitStudent from '../student/courseUnitStudent';
 
 class CourseUnit extends React.Component {
   state = {
@@ -16,7 +17,8 @@ class CourseUnit extends React.Component {
     deletedCourseClass: {},
     courseClassList: [],
     teacherVisibility: false,
-    courseClassVisibity: false,
+    courseClassVisibility: false,
+    studentsVisibility: false,
   };
 
   constructor() {
@@ -47,14 +49,24 @@ class CourseUnit extends React.Component {
   getCourseClass = () => {
     this.setState({
       teacherVisibility: false,
-      courseClassVisibity: true,
+      studentsVisibility: false,
+      courseClassVisibility: true,
     });
   };
 
   getTeachers = () => {
     this.setState({
-      courseClassVisibity: false,
+      courseClassVisibility: false,
+      studentsVisibility: false,
       teacherVisibility: true,
+    });
+  };
+
+  getStudents = () => {
+    this.setState({
+      courseClassVisibility: false,
+      teacherVisibility: false,
+      studentsVisibility: true,
     });
   };
 
@@ -106,17 +118,30 @@ class CourseUnit extends React.Component {
               >
                 Professores <i class="pi pi-users" />
               </button>
+              <button
+                type="button"
+                className="btn btn-info"
+                onClick={this.getStudents}
+              >
+                Alunos <i class="pi pi-users" />
+              </button>
             </div>
           </div>
         </Card>
 
-        {this.state.courseClassVisibity === true ? (
+        {this.state.courseClassVisibility === true ? (
           <CourseUnitCourseClass courseUnit={this.state.courseUnit} />
         ) : (
           ''
         )}
         {this.state.teacherVisibility === true ? (
           <CourseUnitTeacher courseUnit={this.state.courseUnit} />
+        ) : (
+          ''
+        )}
+
+        {this.state.studentsVisibility === true ? (
+          <CourseUnitStudent courseUnit={this.state.courseUnit} />
         ) : (
           ''
         )}

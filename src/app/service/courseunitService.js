@@ -40,6 +40,14 @@ export default class CourseUnitService extends ApiService {
     return this.put(`/${courseUnit.id}/includeteacher`, teacherRegistration);
   }
 
+  includeStudent(courseUnit, studentRegistration) {
+    return this.put(`/${courseUnit.id}/includestudent`, studentRegistration);
+  }
+
+  removeStudent(courseUnit, student) {
+    return this.put(`/${courseUnit.id}/removestudent/${student.id}`);
+  }
+
   getById(id) {
     return this.get(`/find/${id}`);
   }

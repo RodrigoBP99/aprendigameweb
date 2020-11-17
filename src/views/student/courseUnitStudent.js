@@ -5,13 +5,13 @@ import { Dialog } from 'primereact/dialog';
 import { Button } from 'primereact/button';
 import * as messages from '../../components/toastr';
 import { AuthContext } from '../../main/authenticationProvider';
-import CourseClassService from '../../app/service/courseclassService';
+import CourseUnitService from '../../app/service/courseunitService';
 import StudentTable from './studentTable';
 
-class CourseClassStudent extends React.Component {
+class CourseUnitStudent extends React.Component {
   state = {
     studentList: [],
-    courseClass: {},
+    courseUnit: {},
     showAddConfirmDialog: false,
     includeStudentRegistration: '',
     showDeleteConfirmDialog: false,
@@ -20,14 +20,14 @@ class CourseClassStudent extends React.Component {
 
   constructor() {
     super();
-    this.courseClassService = new CourseClassService();
+    this.courseUnitService = new CourseUnitService();
   }
 
   componentDidMount() {
-    const courseClass = this.props.courseClass;
+    const courseUnit = this.props.courseUnit;
     this.setState({
-      courseClass: courseClass,
-      studentList: courseClass.students,
+      courseUnit: courseUnit,
+      studentList: courseUnit.students,
     });
   }
 
@@ -41,8 +41,8 @@ class CourseClassStudent extends React.Component {
   };
 
   deleteStudent = () => {
-    this.courseClassService
-      .removeStudent(this.state.courseClass, this.state.deletedStudent)
+    this.courseUnitService
+      .removeStudent(this.state.courseUnit, this.state.deletedStudent)
       .then((res) => {
         const studentList = this.state.studentList;
         const index = studentList.indexOf(this.state.deletedStudent);
@@ -72,11 +72,11 @@ class CourseClassStudent extends React.Component {
   };
 
   registerStudent = () => {
-    const courseClass = this.state.courseClass;
+    const courseUnit = this.state.courseUnit;
     const studentRegistration = this.state.includeStudentRegistration;
 
-    this.courseClassService
-      .includeStudent(courseClass, studentRegistration)
+    this.courseUnitService
+      .includeStudent(courseUnit, studentRegistration)
       .then((res) => {
         const studentList = this.state.studentList;
         studentList.push(res.data);
@@ -141,6 +141,7 @@ class CourseClassStudent extends React.Component {
                 </button>
                 <StudentTable
                   student={this.state.studentList}
+                  courseUnit={this.state.courseUnit}
                   actionDelete={this.openDeleteConfirmation}
                 />
               </div>
@@ -150,7 +151,12 @@ class CourseClassStudent extends React.Component {
               visible={this.state.showAddConfirmDialog}
               style={{ width: '50vw' }}
               modal={true}
-              onHide={() => this.setState({ showAddConfirmDialog: false })}
+              onHide={() =>
+                this.setState({
+                  showAddConfirmDialog: false,
+                  includeStudentRegistration: '',
+                })
+              }
               footer={footerDialogAdd}
             >
               Digite a matricula do Aluno que deseja incluir
@@ -173,7 +179,6 @@ class CourseClassStudent extends React.Component {
               onHide={() =>
                 this.setState({
                   showAddConfirmDialog: false,
-                  includeStudentRegistration: '',
                 })
               }
               footer={footerDialogDelete}
@@ -187,6 +192,6 @@ class CourseClassStudent extends React.Component {
   }
 }
 
-CourseClassStudent.contextType = AuthContext;
+CourseUnitStudent.contextType = AuthContext;
 
-export default withRouter(CourseClassStudent);
+export default withRouter(CourseUnitStudent);
