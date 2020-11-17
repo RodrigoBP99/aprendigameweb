@@ -14,7 +14,7 @@ class CourseUnitTeacher extends React.Component {
   state = {
     showDeleteConfirmDialog: false,
     showAddConfirmDialog: false,
-    deletedTeacher: null,
+    deletedTeacher: {},
     teacherList: [],
     includeTeacherRegistration: '',
   };
@@ -44,13 +44,13 @@ class CourseUnitTeacher extends React.Component {
     LocalStorageService.clearItem();
   }
 
-  openConfirmation = (teacher) => {
+  openDeleteConfirmation = (teacher) => {
     this.setState({ showDeleteConfirmDialog: true });
     this.setState({ deletedTeacher: teacher });
   };
 
   cancelDeleteCourseClass = () => {
-    this.setState({ showDeleteConfirmDialog: false, deletedCourseClass: {} });
+    this.setState({ showDeleteConfirmDialog: false, deletedTeacher: {} });
   };
 
   deleteTeacher = () => {
@@ -100,10 +100,10 @@ class CourseUnitTeacher extends React.Component {
         const teacherList = this.state.teacherList;
         teacherList.push(res.data);
 
-        console.log(teacherList);
-        console.log(res.data);
-
-        this.setState({ teacherList: teacherList });
+        this.setState({
+          teacherList: teacherList,
+          includeTeacherRegistration: '',
+        });
 
         messages.successMessage('Professor incluido com sucesso!');
       })
@@ -166,7 +166,7 @@ class CourseUnitTeacher extends React.Component {
                 <TeacherTable
                   teacherLoged={this.context.authenticatedUser}
                   teacher={this.state.teacherList}
-                  actionDelete={this.openConfirmation}
+                  actionDelete={this.openDeleteConfirmation}
                 ></TeacherTable>
               </div>
             </div>
