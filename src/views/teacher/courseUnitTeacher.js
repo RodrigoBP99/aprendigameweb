@@ -188,7 +188,12 @@ class CourseUnitTeacher extends React.Component {
               visible={this.state.showAddConfirmDialog}
               style={{ width: '50vw' }}
               modal={true}
-              onHide={() => this.setState({ showAddConfirmDialog: false })}
+              onHide={() =>
+                this.setState({
+                  showAddConfirmDialog: false,
+                  includeTeacherRegistration: '',
+                })
+              }
               footer={footerDialogAdd}
             >
               Digite a matricula do professor que deseja incluir

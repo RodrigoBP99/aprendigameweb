@@ -9,7 +9,9 @@ export default (props) => {
         <td>{student.name}</td>
         <td> {student.schoolName} </td>
         <td>
-          {student.courseUnit.code} <br /> {student.courseUnit.name}
+          {student.courseUnit ? student.courseUnit.code : props.courseUnit.code}
+          <br />
+          {student.courseUnit ? student.courseUnit.name : props.courseUnit.name}
         </td>
 
         <td>

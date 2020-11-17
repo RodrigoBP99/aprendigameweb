@@ -39,6 +39,7 @@ export default (props) => {
           <th scope="col">Nº</th>
           <th scope="col">Matricula</th>
           <th scope="col">Nome</th>
+          <th scope="col">Ações</th>
         </tr>
       </thead>
       <tbody>{rows}</tbody>
