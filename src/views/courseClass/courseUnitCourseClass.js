@@ -62,22 +62,22 @@ class CourseUnitCourseClass extends React.Component {
   };
 
   deleteCourseClass = () => {
-    this.service
-      .deletecourseUnit(this.state.deletedCourseClass.id)
+    this.courseClassService
+      .deleteCourseClass(this.state.deletedCourseClass.id)
       .then((res) => {
-        const quizzList = this.state.quizzList;
-        const index = quizzList.indexOf(this.state.deletedCourseClass);
-        quizzList.splice(index, 1);
+        const courseClassList = this.state.courseClassList;
+        const index = courseClassList.indexOf(this.state.deletedCourseClass);
+        courseClassList.splice(index, 1);
 
         this.setState({
-          quizzList: quizzList,
+          courseClassList: courseClassList,
           showConfirmDialog: false,
         });
 
-        messages.successMessage('Turma deletada com sucesso');
+        messages.successMessage('Classe deletada com sucesso');
       })
       .catch((erro) => {
-        messages.erroMessage('Erro ao tentar deletar a Turma');
+        messages.erroMessage('Erro ao tentar deletar a Classe');
       });
   };
 
