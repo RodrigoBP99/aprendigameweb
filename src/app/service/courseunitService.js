@@ -52,6 +52,10 @@ export default class CourseUnitService extends ApiService {
     return this.get(`/find/${id}`);
   }
 
+  deleteCourseUnit(id) {
+    return this.delete(`/${id}`);
+  }
+
   validate(courseUnit) {
     const erros = [];
 

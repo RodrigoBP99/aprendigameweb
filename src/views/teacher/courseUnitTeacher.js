@@ -17,6 +17,7 @@ class CourseUnitTeacher extends React.Component {
     deletedTeacher: {},
     teacherList: [],
     includeTeacherRegistration: '',
+    showDeleteCourseDialog: false,
   };
 
   constructor() {
@@ -49,15 +50,27 @@ class CourseUnitTeacher extends React.Component {
     this.setState({ deletedTeacher: teacher });
   };
 
-  cancelDeleteCourseClass = () => {
-    this.setState({ showDeleteConfirmDialog: false, deletedTeacher: {} });
+  cancelDeleteTeacher = () => {
+    this.setState({
+      showDeleteConfirmDialog: false,
+      showDeleteCourseDialog: false,
+      deletedTeacher: {},
+    });
   };
 
   deleteTeacher = () => {
     const teacherList = this.state.teacherList;
 
     if (teacherList.length === 1) {
-      messages.erroMessage('Não é possivel deixar o curso sem professores');
+      this.courseUnitService
+        .deleteCourseUnit(this.props.courseUnit.id)
+        .then((res) => {
+          messages.successMessage('Curso deletado com sucesso!');
+          this.props.history.push('/consult-course');
+        })
+        .catch((erro) => {
+          messages.erroMessage(erro.response.data);
+        });
     } else {
       this.courseUnitService
         .removeteacher(this.props.courseUnit, this.state.deletedTeacher)
@@ -77,6 +90,10 @@ class CourseUnitTeacher extends React.Component {
           messages.erroMessage('Erro ao executar Ação');
         });
     }
+  };
+
+  openConfirmationDeleteCourse = () => {
+    this.setState({ showDeleteCourseDialog: true });
   };
 
   openConfirmationAdd = () => {
@@ -127,7 +144,7 @@ class CourseUnitTeacher extends React.Component {
         <Button
           label="Cancelar"
           icon="pi pi-times"
-          onClick={this.cancelDeleteCourseClass}
+          onClick={this.cancelDeleteTeacher}
           className="p-button-secondary"
         />
       </div>
@@ -166,7 +183,11 @@ class CourseUnitTeacher extends React.Component {
                 <TeacherTable
                   teacherLoged={this.context.authenticatedUser}
                   teacher={this.state.teacherList}
-                  actionDelete={this.openDeleteConfirmation}
+                  actionDelete={
+                    this.state.teacherList.length === 1
+                      ? this.openConfirmationDeleteCourse
+                      : this.openDeleteConfirmation
+                  }
                 ></TeacherTable>
               </div>
             </div>
@@ -181,6 +202,24 @@ class CourseUnitTeacher extends React.Component {
               footer={footerDialog}
             >
               Você deseja mesmo deletar essa Turma?
+            </Dialog>
+
+            <Dialog
+              header="Confirmação"
+              visible={this.state.showDeleteCourseDialog}
+              style={{ width: '50vw' }}
+              modal={true}
+              onHide={() => this.setState({ showDeleteCourseDialog: false })}
+              footer={footerDialog}
+            >
+              <h4>
+                Se você sair irá deletar o Curso, você tem certeza que deseja
+                sair?!
+              </h4>
+              <h5>
+                Ao deletar o curso todas as turmas serão apagadas. Assim como os
+                questionarios e presenças dessas turmas!
+              </h5>
             </Dialog>
 
             <Dialog

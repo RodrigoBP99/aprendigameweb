@@ -316,3 +316,7 @@ input[type='radio'] {
 .pi {
   margin-left: 3px;
 }
+
+.p-dialog-content {
+  text-align: center;
+}
