@@ -139,7 +139,7 @@ class CourseClass extends React.Component {
           </h3>
           <div className="row">
             <div className="col-md-2">
-              <FormGroup label="Matricula">
+              <FormGroup label="Matrícula">
                 <input
                   type="text"
                   className="form-control"

@@ -235,7 +235,7 @@ class CourseUnitTeacher extends React.Component {
               }
               footer={footerDialogAdd}
             >
-              <h4>Digite a matricula do professor que deseja incluir</h4>
+              <h4>Digite a matrícula do professor que deseja incluir</h4>
               <input
                 type="text"
                 placeholder="TH0000"

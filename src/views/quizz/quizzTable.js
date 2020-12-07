@@ -39,7 +39,7 @@ export default (props) => {
       <thead>
         <tr>
           <th scope="col">Código</th>
-          <th scope="col">Titulo</th>
+          <th scope="col">Título</th>
           <th scope="col">Nº Questões</th>
           <th scope="col">Valor</th>
           <th scope="col">Ações</th>

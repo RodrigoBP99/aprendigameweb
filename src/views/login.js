@@ -53,7 +53,7 @@ class Login extends React.Component {
                     <fieldset>
                       <div className="form-group">
                         <FormGroup
-                          label="Matricula: *"
+                          label="Matrícula: *"
                           htmlFor="exampleInputRegistration"
                         >
                           <input
@@ -65,7 +65,7 @@ class Login extends React.Component {
                             className="form-control"
                             id="exampleInputRegistration"
                             aria-describedby="registration-help"
-                            placeholder="Digite sua Matricula"
+                            placeholder="Digite sua Matrícula"
                           />
                         </FormGroup>
                         <FormGroup

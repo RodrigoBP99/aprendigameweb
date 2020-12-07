@@ -65,18 +65,18 @@ class TeacherRegister extends React.Component {
                     type="text"
                     id="inputName"
                     name="name"
-                    placeholder="Usuario da Silva Teste"
+                    placeholder="Usuario de Teste"
                     className="form-control"
                     value={this.state.name}
                     onChange={(e) => this.setState({ name: e.target.value })}
                   />
                 </FormGroup>
-                <FormGroup label="Matricula: *" htmlFor="inputRegistration">
+                <FormGroup label="Matrícula: *" htmlFor="inputRegistration">
                   <input
                     type="text"
                     id="inputRegistration"
                     name="registration"
-                    placeholder="TH15468"
+                    placeholder="TH00000"
                     className="form-control"
                     onChange={(e) =>
                       this.setState({ registration: e.target.value })

@@ -26,7 +26,7 @@ class TeacherService extends ApiService {
     }
 
     if (!teacher.registration) {
-      msgs.push('O campo Matricula é obrigatorio');
+      msgs.push('O campo Matrícula é obrigatorio');
     }
 
     if (!teacher.password || !passwordRepet) {

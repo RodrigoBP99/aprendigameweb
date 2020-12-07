@@ -159,7 +159,7 @@ class CourseUnitStudent extends React.Component {
               }
               footer={footerDialogAdd}
             >
-              <h4>Digite a matricula do Aluno que deseja incluir</h4>
+              <h4>Digite a matrícula do Aluno que deseja incluir</h4>
               <input
                 type="text"
                 placeholder="ST0000"

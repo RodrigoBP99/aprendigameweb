@@ -31,7 +31,7 @@ export default (props) => {
       <thead>
         <tr>
           <th scope="col">Nº</th>
-          <th scope="col">Matricula</th>
+          <th scope="col">Matrícula</th>
           <th scope="col">Nome</th>
           <th scope="col">Instituição</th>
           <th scope="col">Curso</th>

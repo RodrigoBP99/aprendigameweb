@@ -32,7 +32,7 @@ class Home extends React.Component {
               Professor(a) <i>{this.state.teacher.name}</i>
             </h1>
           </center>
-          <p className="lead">Esse é seu sistema de controle de Turmas.</p>
+          <p className="lead">Esse é seu sistema de controle de Turmas e Cursos.</p>
           <hr className="my-4" />
           <p>
             E essa é sua área administrativa, utilize um dos menus ou botões
@@ -52,9 +52,6 @@ class Home extends React.Component {
               role="button"
             >
               <i className="fa fa-users"></i> Turmas
-            </a>
-            <a className="btn btn-danger btn-lg" href="#/home" role="button">
-              <i className="fa fa-users"></i> Questionarios
             </a>
           </p>
         </div>

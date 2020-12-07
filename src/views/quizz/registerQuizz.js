@@ -81,7 +81,7 @@ class RegisterCourseUnit extends React.Component {
         >
           <div className="row">
             <div className="col-md-12">
-              <FormGroup htmlFor="inputTittle" label="Titulo do Quizz: *">
+              <FormGroup htmlFor="inputTittle" label="Título do Quizz: *">
                 <input
                   type="text"
                   name="tittle"
@@ -89,7 +89,7 @@ class RegisterCourseUnit extends React.Component {
                   value={this.state.tittle}
                   onChange={this.handleChange}
                   className="form-control"
-                  placeholder="Titulo do Questionario"
+                  placeholder="Título do Questionario"
                 />
               </FormGroup>
             </div>
